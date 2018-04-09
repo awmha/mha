@@ -1,0 +1,5 @@
+ <div "nested-fields">
+  <%= f.file_field :pic %>
+  <!-- <%= f.file_field :pic, :multiple => true, name: "project[pictures_attributes][][pic]" %> -->
+  <%= link_to_remove_association "remove", f %>
+</div>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @project.name %>
+</h1>
+
+<h2>
+  <%= @project.location %>
+</h2>
+
+<h4>
+  Created by: <%= @project.user.name %>
+</h4>
+
+<table class="project_edit">
+  <thead>
+    <th style="width:25px">No</th>
+    <th>Image</th>
+  </thead>
+<% @project.pictures.each_with_index do |image, index| %>
+  <tr>
+    <td><%= index %></td>
+
+    <td>
+      <%= link_to image_url(image.image), :target => "_blank" do %>
+        <%= image_tag image.image, style:"height:200px" if @project.pictures %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

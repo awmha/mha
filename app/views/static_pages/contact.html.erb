@@ -1,0 +1,152 @@
+<style>
+
+.carousel-item { display:inline;
+  position: relative;
+  width: 360px;
+  height: 240px;
+  overflow: hidden;
+}
+.slick-slide img {
+  opacity: 1.0;
+}
+
+#social-media a {width:45px;display:inline-block;text-align:center}
+.bottom-white-bar {z-index:1000;position: absolute;bottom: 0;right: 0;background-color: rgba(256,256,256,1);color: #666769;height: 70px;font-size: 24px;margin:0}
+@media (max-height: 475px) {.bottom-white-bar {display:none;} p.first {margin-top:-20px} #myCarousel-contact {height:120%} }
+
+@media (height:320px) {.contact-responsive {height:420px}}
+@media (max-height:379px) and (min-height:335px) {.contact-responsive {height:475px}}
+@media (max-height:414px) and (min-height:380px) {.contact-responsive {height:500px}}
+
+@media (max-width: 320px) {img.header-logo {width:220px} p.first {margin-top:-20px} .contact-responsive {overflow-y:hidden!important;}}
+.contact-responsive2 {overflow-y: visible;z-index: 1000;background-color: rgba(256,256,256,0.8);color: #666769;padding: 120px 60px;height: 100%;font-size: 14px;text-align:center;position: fixed;left: 33.33%;}
+
+/*@media (min-width: 768px) {
+.carousel-item img {height:1050px}
+}*/
+
+@media (min-height: 1251px) {
+  .carousel-item img {height: 100%;}
+  #loadcover {background-size:cover}
+  .slideImage {height: 100%;}
+#myCarousel, #myCarousel div, #myCarousel-contact, #myCarousel-contact div{height:100%;}
+#slidecontrol {display:none}
+.container-fluid {    background-color: rgba(255, 255, 255, 1);}
+}
+@media (max-height: 1250px) {
+  .carousel-item img, #loadcover {height: 1250px;}
+  .slideImage {height: 1150px;}
+}
+@media (max-height: 1150px) {
+  .carousel-item img, #loadcover {height: 1150px;}
+  .slideImage {height: 1005px;}
+}
+@media (max-height: 1050px) {
+  .carousel-item img, #loadcover {height: 1050px;}
+  .slideImage {height: 905px;}
+}
+@media (max-height: 950px) {
+  .carousel-item img, #loadcover {height: 950px;}
+  .slideImage {height: 805px;}
+}
+@media (max-height: 850px) {
+  .carousel-item img, #loadcover {height: 850px;}
+  .slideImage {height: 705px;}
+}
+@media (max-height: 750px) {
+  .carousel-item img, #loadcover {height: 750px;}
+  .slideImage {height: 605px;}
+}
+@media (max-height: 650px) {
+  .carousel-item img, #loadcover {height: 650px;}
+  .slideImage {height: 505px;}
+}
+@media (max-height: 450px) {
+  .carousel-item img, #loadcover {height: 450px;}
+  .slideImage {height: 305px;}
+}
+@media (max-height: 350px) {
+  .carousel-item img, #loadcover {height: 350px;}
+  .slideImage {height: 205px;}
+}
+
+@media (min-width: 570px) and (max-width: 767px) {
+.contact-responsive2 {float:left;position:fixed;left:0;padding: 90px 60px}
+.left-slide, .right-slide {width:50%!important}
+}
+
+@media (max-width: 569px) {
+.contact-responsive2 {float:left;position:fixed;left:0;padding: 90px 60px}
+.left-slide, .right-slide {width:100%!important}
+}
+
+@media (min-width: 570px) and (max-width: 767px) {
+.contact-responsive2 {float:left;position:fixed;left:0;padding: 90px 60px}
+.left-slide, .right-slide {width:50%!important}
+}
+
+body {height:100%;overflow:hidden}
+.navbar {background-color:rgba(255, 255, 255, 1.0);}
+
+.left-slide {width:33.33%;float:left;top: 60px;}
+.right-slide {width:33.33%;float:right;top:60px}
+
+@media (min-height: 476px) {
+.left-slide, .right-slide {height:calc(100% - 120px);}
+}
+@media (max-height: 475px) {
+.left-slide, .right-slide {height:100%;}
+}
+@media (max-height: 475px) and (max-width: 737px) {
+.left-slide, .right-slide {height:100%;width:33.33%!important;}
+}
+</style>
+
+<!-- d-4 no-repeat top center -->
+
+  <header class="carousel slide" id="myCarousel-contact">
+    <div class="carousel-inner">
+      <div class="item active" style="">
+        <div class="center" style="height:100%">
+          <div class="cycle-slideshow left-slide" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="1" id="fade-slide-show">
+          <% contact_page_project = @projects.find_by(contact_page_project: true) %>
+            <% contact_page_project.pictures.each do |picture| %>
+              <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+            <% end %>
+          </div>
+          <div class="cycle-slideshow left-slide" data-ride="carousel" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="1" id="fade-slide-show">
+            <% contact_page_project = @projects.find_by(contact_page_project: true) %>
+            <% picture_order = contact_page_project.pictures[1..-1] + [contact_page_project.pictures[0]] %>
+              <% picture_order.each do |picture| %>
+                <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+              <% end %>
+          </div>
+          <div class="contact-responsive2 col-lg-4 col-md-4 col-sm-8 col-xs-12">
+            <p class="first">If you would like to know more about our practice, please contact either <nobr>Erin Moran Hook</nobr> or <nobr>Tim Hook.</nobr></p><br>
+            <p>Moran Hook Architecture, PLLC<br></p>
+            <p>37 West 39th Street, #1001<br>
+            New York, NY 10018</p>
+            <p>tel: 212 229-2950<br>
+            fax: 212 229-2970<br></p>
+            <p>email: <a href="mailto:emh@moranhook.com">emh@moranhook.com</a></p>
+            <div id="social-media">
+              <a href="https://www.facebook.com/moranhook" target="_blank"><i aria-hidden="true" class="fa fa-facebook"></i></a>
+              <!--<a href="#" target="_blank"><i aria-hidden="true" class="fa fa-instagram"></i></a>-->
+              <a href="http://www.houzz.com/pro/moranhook/moran-hook-architecture" target="_blank"><i aria-hidden="true" class="fa fa-houzz"></i></a>
+              <a href="https://www.pinterest.com/moranhook/" target="_blank"><i aria-hidden="true" class="fa fa-pinterest"></i></a>
+            </div>
+          </div>
+          <div class="cycle-slideshow right-slide" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="2" id="fade-slide-show">
+            <% contact_page_project = @projects.find_by(contact_page_project: true) %>
+            <% picture_order = contact_page_project.pictures[2..-1] + contact_page_project.pictures[0,1] %>
+              <% picture_order.each do |picture| %>
+              <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<script>
+  $('.cycle-slideshow').cycle();
+</script>

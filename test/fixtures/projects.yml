@@ -1,0 +1,21 @@
+one_project:
+  name: "First Project"
+  location: "First Location"
+  user_id: bob
+
+two_project:
+  name: "Second Project"
+  location: "Second, Location"
+  user_id: john
+
+three_project:
+  name: "Third Project"
+  location: "Third, Loc."
+  user_id: sarah
+
+<% 7.times do |n| %>
+project_<%= n %>:
+  name: <%= Faker::Lorem.words(3).to_sentence.titleize.gsub(",",'') %>
+  location: <%= Faker::Address.city + ", " + Faker::Address.state_abbr %>
+  user_id: bob
+<% end %>

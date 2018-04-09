@@ -1,0 +1,106 @@
+<%= form_for(project, html: {multipart: true}) do |f| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<h1>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+</h1>
+
+<h2>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+</h2>
+
+<h4>
+  Created by: <%= project.user.name %>
+</h4>
+
+<h4>Main Project
+  <%= f.label :main_project, "Yes", :value => true %>
+  <%= f.radio_button :main_project, true %>
+  <br/>
+  <%= f.label :main_project, "No", :value => false %>
+  <%= f.radio_button :main_project, false %>
+</h4>
+
+<h4>Contact Page Project
+  <%= f.label :contact_page_project, "Yes", :value => true %>
+  <%= f.radio_button :contact_page_project, true %>
+  <br/>
+  <%= f.label :contact_page_project, "No", :value => false %>
+  <%= f.radio_button :contact_page_project, false %>
+</h4>
+
+<h4>
+    <div class="actions">
+      <%= f.submit "Submit" %>
+    </div>
+    <% end %>
+    </h4>
+
+<table class="project_edit">
+  <thead>
+    <th style="width:25px">Order</th>
+    <th>Reorder</th>
+    <th>Image</th>
+    <th>Dimensions (W x H)<br/>Size</th>
+    <th>Remove</th>
+  </thead>
+<% @project.project_pictures.each do |project_picture| %>
+  <tr>
+    <td>
+      <% if project_picture.position == 0 %>
+        THUMBNAIL
+      <% else %>
+        <%= project_picture.position %>
+      <% end %>
+    </td>
+    <td>
+      <% if project_picture.position == 1 || project_picture.position == @project.project_pictures.count %>
+        <%= button_to "SET AS THUMB", make_thumbnail_path, params: { image_position: project_picture.position, project: project, picture_height: project_picture.picture.height, picture_width: project_picture.picture.width } %>
+      <% end %>
+      <% if project_picture.position != 0 and project_picture.position != 1 %>
+        <%= button_to "\u2191", move_project_image_up_path, params: { image_position: project_picture.position, project: project } %>
+      <% end %>
+      <% if (project.has_thumb? && project_picture.position != @project.project_pictures.count - 1 ) || (project.has_thumb? == false && project_picture.position != @project.project_pictures.count) %>
+
+        <%= button_to "\u2193", move_project_image_down_path, params: { image_position: project_picture.position, project: project } %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to image_url(project_picture.picture.image), :target => "_blank" do %>
+        <%= image_tag project_picture.picture.image, style:"height:200px" if @project.pictures %>
+      <% end %>
+    </td>
+    <td>
+      <%= project_picture.picture.width %> x <%= project_picture.picture.height %> px
+      <br />
+      <%= project_picture.get_size %>
+    </td>
+     <td> <%= link_to "Delete", project_project_picture_path(@project.id, project_picture), :method => :delete, data: {confirm: "Are you sure you want to remove this picture from this project?"} %></td> 
+  </tr>
+<% end %>
+</table>
+
+<h1>Add more images</h1>
+<%= form_for(project, html: {multipart: true}) do |f| %>
+
+    <field>
+      <%= f.hidden_field :project, :value => @project.id %>
+      <%= file_field_tag "images[]", type: :file, multiple: true %>
+
+    </field>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
