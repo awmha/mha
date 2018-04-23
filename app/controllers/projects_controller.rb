@@ -18,7 +18,6 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    # require 'pry'; binding.pry
     @project = Project.find(params[:id])
     @project.pictures.build if @project.pictures.empty?
   end
@@ -62,7 +61,6 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    # require 'pry'; binding.pry
     if params[:project][:main_project] == "true"
       set_as_main_project
     end
@@ -101,7 +99,6 @@ class ProjectsController < ApplicationController
 
   def move_image_up
     @project = Project.find(params[:project])
-        # require 'pry'; binding.pry
     old_position = params[:image_position].to_i
     if old_position == 1
       flash[:error] = "Image is already first.  Can't move it up."
