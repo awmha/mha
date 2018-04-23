@@ -17,8 +17,9 @@ Rails.application.routes.draw do
     resources :project_pictures
   end
 
-
   resources :pictures, :only => [:create, :edit, :update, :destroy, :show, :index]
+
+  resources :static_pages, :only => [:edit, :update, :show]
 
   post 'projects/:id/move_image_up' => 'projects#move_image_up', as: :move_project_image_up
   post 'projects/:id/move_image_down' => 'projects#move_image_down', as: :move_project_image_down

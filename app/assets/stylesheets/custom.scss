@@ -29,6 +29,19 @@ textarea {
   margin-bottom: 10px;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #b5b6b7;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #b5b6b7;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #b5b6b7;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {

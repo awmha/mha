@@ -122,18 +122,19 @@ body {height:100%;overflow:hidden}
               <% end %>
           </div>
           <div class="contact-responsive2 col-lg-4 col-md-4 col-sm-8 col-xs-12">
-            <p class="first">If you would like to know more about our practice, please contact either <nobr>Erin Moran Hook</nobr> or <nobr>Tim Hook.</nobr></p><br>
-            <p>Moran Hook Architecture, PLLC<br></p>
-            <p>37 West 39th Street, #1001<br>
-            New York, NY 10018</p>
-            <p>tel: 212 229-2950<br>
-            fax: 212 229-2970<br></p>
-            <p>email: <a href="mailto:emh@moranhook.com">emh@moranhook.com</a></p>
+            <p class="first"><%= @static_page_info.contact_text %></p><br>
+            <p><%= @static_page_info.company_name %><br></p>
+            <p><%= @static_page_info.address_line_1 %><br>
+            <%= @static_page_info.address_line_2 %></p>
+            <p>tel: <%= @static_page_info.phone_number %><br>
+            fax: <%= @static_page_info.fax_number %><br></p>
+            <p>email: <a href="mailto:<%= @static_page_info.company_email %>"><%= @static_page_info.company_email %></a></p>
             <div id="social-media">
-              <a href="https://www.facebook.com/moranhook" target="_blank"><i aria-hidden="true" class="fa fa-facebook"></i></a>
-              <a href="https://www.instagram.com/moranhookarchitecture/" target="_blank"><i aria-hidden="true" class="fa fa-instagram"></i></a>
-              <a href="http://www.houzz.com/pro/moranhook/moran-hook-architecture" target="_blank"><i aria-hidden="true" class="fa fa-houzz"></i></a>
-              <a href="https://www.pinterest.com/moranhook/" target="_blank"><i aria-hidden="true" class="fa fa-pinterest"></i></a>
+              <% @static_page_info.social_media.each_with_index do |(type, value), i| %>
+                <a href="#{value}", target:"_blank" %>
+                  <i <%={:class => ((type == "facebook") ? "fa-facebook-official" : (type == "linkedin") ? "fa-linkedin-square" : (type == "twitter") ? "fa-twitter-square" : (type == "tumblr") ? "fa-tumblr-square" : (type == "instagram") ? "fa-instagram" : (type == "googleplus") ? "fa-google-plus-square" : (type == "youtube") ? "fa-youtube-square" : (type == "vimeo") ? "fa-vimeo-square" : (type == "email") ? "fa-envelope" : (type == "flickr") ? "fa-flickr" : ""), "aria-hidden" => "true"} %> ></i>
+                </a>
+              <% end %>
             </div>
           </div>
           <div class="cycle-slideshow right-slide" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="2" id="fade-slide-show">
