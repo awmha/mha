@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326201907) do
+ActiveRecord::Schema.define(version: 20180423180011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20180326201907) do
     t.boolean  "main_project"
     t.boolean  "contact_page_project"
     t.boolean  "display"
+  end
+
+  create_table "static_pages", force: :cascade do |t|
+    t.string "company_name"
+    t.text   "about_us"
+    t.string "address_line_1"
+    t.string "address_line_2"
+    t.string "phone_number"
+    t.string "fax_number"
+    t.string "company_email"
+    t.text   "social_media"
+    t.text   "contact_text"
   end
 
   create_table "users", force: :cascade do |t|

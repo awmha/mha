@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  before_action :logged_in_user
+  
   def index
     @pictures = Picture.all
   end
