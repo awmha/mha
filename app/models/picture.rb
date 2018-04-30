@@ -6,8 +6,6 @@ class Picture < ApplicationRecord
   # validates :project, :image, presence: true
   mount_uploader :image, PictureUploader
 
-
-
   # def image=(val)
   #   if !val.is_a?(String) && valid?
   #     image_will_change!

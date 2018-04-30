@@ -13,23 +13,32 @@
     </div>
   <% end %>
 
-<%= f.label "Company Name" %>
-<%= f.text_field :company_name, placeholder: "Company Name" %>
+<p><%= f.label "Company Name" %>
+<%= f.text_field :company_name, placeholder: "Company Name" %></p>
 
-<%= f.label "Address Line 1" %>
-<%= f.text_field :address_line_1, placeholder: "Building Street, Suite" %>
+<p><%= f.label "Address Line 1" %>
+<%= f.text_field :address_line_1, placeholder: "Building Street, Suite" %></p>
 
-<%= f.label "Address Line 2" %>
-<%= f.text_field :address_line_2, placeholder: "City, State Zip" %>
+<p><%= f.label "Address Line 2" %>
+<%= f.text_field :address_line_2, placeholder: "City, State Zip" %></p>
 
-<%= f.label "Phone Number" %>
-<%= f.text_field :phone_number, placeholder: "Phone" %>
+<p><%= f.label "Phone Number" %>
+<%= f.text_field :phone_number, placeholder: "Phone" %></p>
 
-<%= f.label "Fax Number" %>
-<%= f.text_field :fax_number, placeholder: "Fax" %>
+<p><%= f.label "Fax Number" %>
+<%= f.text_field :fax_number, placeholder: "Fax" %></p>
 
-<%= f.label "Company Email" %>
-<%= f.text_field :company_email, placeholder: "Company Email" %>
+<p><%= f.label "Company Email" %>
+<%= f.text_field :company_email, placeholder: "Company Email" %></p>
+
+<p><%= f.label "Logo" %>
+<%= image_tag(@static_page.logo) if @static_page.logo? %>
+<% if @static_page.height? && @static_page.width? %>
+  <p><%= @static_page.height %> x <%= @static_page.width %></p>
+<% end %>
+<p>Upload a logo file:
+  <%= f.file_field :logo %>
+</p>
 
     <p style="font-weight:bold;">Social Media URLs</p>
     <% social_media_options = [['Facebook', 'facebook'], ['Twitter', 'twitter'], ['Instagram', 'instagram'], ['LinkedIn', 'linkedin'], ['Tumblr', 'tumblr'], ['Flickr', 'flickr'], ['Google+', 'googleplus'], ['You Tube', 'youtube'], ['Vimeo', 'vimeo'], ['Vine', 'vine'], ['Email', 'email']] %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423190926) do
+ActiveRecord::Schema.define(version: 20180430173917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,17 +45,20 @@ ActiveRecord::Schema.define(version: 20180423190926) do
   end
 
   create_table "static_pages", force: :cascade do |t|
-    t.string "company_name"
-    t.text   "about_us"
-    t.string "address_line_1"
-    t.string "address_line_2"
-    t.string "phone_number"
-    t.string "fax_number"
-    t.string "company_email"
-    t.text   "social_media"
-    t.text   "contact_text"
-    t.text   "meta_description"
-    t.text   "meta_keywords"
+    t.string  "company_name"
+    t.text    "about_us"
+    t.string  "address_line_1"
+    t.string  "address_line_2"
+    t.string  "phone_number"
+    t.string  "fax_number"
+    t.string  "company_email"
+    t.text    "social_media"
+    t.text    "contact_text"
+    t.text    "meta_description"
+    t.text    "meta_keywords"
+    t.string  "logo"
+    t.integer "height"
+    t.integer "width"
   end
 
   create_table "users", force: :cascade do |t|
