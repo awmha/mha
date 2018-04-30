@@ -15,3 +15,4 @@ function addSocialMedia() {
     name: "social_media_values[" + i + "]"
   }).val('').appendTo('#social_media');
 }
+}
