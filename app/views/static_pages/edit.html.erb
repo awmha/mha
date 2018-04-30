@@ -1,3 +1,27 @@
+<script>
+$(function() {
+  $('#add_social_media').click(addSocialMedia);
+});
+
+function addSocialMedia() {
+  var i = 1;
+  while ($('#social_media_' + i).length) {
+    i++;
+  }
+
+  $('#social_media_1').clone().attr({
+    id: "social_media_" + i,
+    name: "social_media[" + i + "]"
+  }).val('facebook').appendTo('#social_media_list');
+  
+  $('#social_media_values_1').clone().attr({
+    id: "social_media_values_" + i,
+    name: "social_media_values[" + i + "]"
+  }).val('').appendTo('#social_media_list');
+
+}
+</script>
+
 <h1>Editing Company &amp; Site Info</h1>
 
 <%= form_for(@static_page, html: {multipart: true}) do |f| %>
@@ -40,34 +64,37 @@
   <%= f.file_field :logo %>
 </p>
 
-    <p style="font-weight:bold;">Social Media URLs</p>
-    <% social_media_options = [['Facebook', 'facebook'], ['Twitter', 'twitter'], ['Instagram', 'instagram'], ['LinkedIn', 'linkedin'], ['Tumblr', 'tumblr'], ['Flickr', 'flickr'], ['Google+', 'googleplus'], ['You Tube', 'youtube'], ['Vimeo', 'vimeo'], ['Vine', 'vine'], ['Email', 'email']] %>
-    <div id="social_media_urls">
-      <% if !@static_page.social_media.nil? %>
-        <% @static_page.social_media.each_with_index do |(type, value), i| %>
-          <%= select_tag "social_media[#{i+1}]", options_for_select(social_media_options, "#{type}"), class: 'input-medium' %>
-          <%= text_field_tag "social_media_values[#{i+1}]", value, class: 'input-block-level' %>
-        <% end %>
-      <% else %>
-        <%= select_tag 'social_media[1]', options_for_select(social_media_options, 'facebook'), class: 'input-medium' %>
-        <%= text_field_tag 'social_media_values[1]', @static_page.facebook, class: 'input-block-level' %>
-        <%= select_tag 'social_media[2]', options_for_select(social_media_options, 'twitter'), class: 'input-medium' %>
-        <%= text_field_tag 'social_media_values[2]', @static_page.twitter, class: 'input-block-level' %>
+<p style="font-weight:bold;">Social Media URLs</p>
+  <% social_media_options = [['Facebook', 'facebook'], ['Instagram', 'instagram'], ['Houzz', 'houzz'], ['Pinterest', 'pinterest'], ['Twitter', 'twitter'], ['LinkedIn', 'linkedin'], ['Tumblr', 'tumblr'], ['Flickr', 'flickr'], ['Google+', 'googleplus'], ['You Tube', 'youtube'], ['Vimeo', 'vimeo'], ['Email', 'email']] %>
+
+  <div id="social_media_urls">
+    <ul id="social_media_list">
+    <% if !@static_page.social_media.blank? %>
+      <% @static_page.social_media.each_with_index do |(type, value), i| %>
+        <li><%= select_tag "social_media[#{i+1}]", options_for_select(social_media_options, "#{type}"), class: 'input-medium' %>
+        <%= text_field_tag "social_media_values[#{i+1}]", value, class: 'input-block-level' %></li>
       <% end %>
-    </div>
-    <button id="add_social_media" type="button" class="btn btn-info" style="margin-bottom:20px;">Add Social Media URL</button>
+    <% else %>
+      <li><%= select_tag 'social_media[1]', options_for_select(social_media_options, 'facebook'), class: 'input-medium' %>
+      <%= text_field_tag 'social_media_values[1]', @static_page.facebook, class: 'input-block-level' %></li>
+      <li><%= select_tag 'social_media[2]', options_for_select(social_media_options, 'twitter'), class: 'input-medium' %>
+      <%= text_field_tag 'social_media_values[2]', @static_page.twitter, class: 'input-block-level' %></li>
+    <% end %>
+    </ul>
+  </div>
+  <button id="add_social_media" type="button" class="btn btn-info" style="margin-bottom:20px;">Add Social Media URL</button>
 
-<%= f.label "Contact info text" %>
-<%= f.text_area :contact_text, placeholder: "Text to be shown at top of contact page", :cols => "50", :rows => "5" %>
+<p><%= f.label "About Us" %>
+<%= f.text_area :about_us, placeholder: "Text to be shown on homepage under about us.", :cols => "50", :rows => "5" %></p>
 
-<%= f.label "About Us" %>
-<%= f.text_area :about_us, placeholder: "Text to be shown on homepage under about us.", :cols => "50", :rows => "5" %>
+<p><%= f.label "Contact info text" %>
+<%= f.text_area :contact_text, placeholder: "Text to be shown at top of contact page", :cols => "50", :rows => "5" %></p>
 
-<%= f.label "Meta Description" %>
-<%= f.text_area :meta_description, placeholder: "Meta description for search engines.", :cols => "50", :rows => "5" %>
+<p><%= f.label "Meta Description" %>
+<%= f.text_area :meta_description, placeholder: "Meta description for search engines.", :cols => "50", :rows => "5" %></p>
 
-<%= f.label "Meta Keywords" %>
-<%= f.text_area :meta_keywords, placeholder: "Meta keywords for search engines.", :cols => "50", :rows => "5" %>
+<p><%= f.label "Meta Keywords" %>
+<%= f.text_area :meta_keywords, placeholder: "Meta keywords for search engines.", :cols => "50", :rows => "5" %></p>
 
 <h4>
   <div class="actions">

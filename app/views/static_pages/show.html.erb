@@ -1,9 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<p class="user-name">
+<p>
   <%= @static_page.company_name %>
 </p>
-
-
+<p>
+  <%= @static_page.address_line_1 %>
+</p>
+<p>
+  <%= @static_page.address_line_2 %>
+</p>
+<p>
+  <%= @static_page.phone_number %>
+</p>
+<p>
+  <%= @static_page.fax_number %>
+</p>
+<p>
+  <%= @static_page.company_email %>
+</p>
+<p>
+  <%= image_tag(@static_page.logo) %>
+</p>
+<p>
+  <ul>
+    <% @static_page.social_media.each do |key, array| %>
+      <li><%= key %> : <%= link_to array, array, target: :_blank %></li>
+    <% end %>
+  </ul>
+</p>
+<p>
+  <b>About us text that appears on homepage:</b>
+  <%= simple_format h(@static_page.about_us) %>
+</p>
+<p>
+  <b>Text that appears on contact page:</b>
+  <%= @static_page.contact_text %>
+</p>
+<p>
+  <b>Meta description which is what shows up on search engines:</b>
+  <%= @static_page.meta_description %>
+</p>
+<p>
+  <b>Meta keywords which help search engines know about a site's content:</b>
+  <%= @static_page.meta_keywords %>
+</p>
 
 <%= link_to 'Edit', edit_static_page_path(@static_page) %>
