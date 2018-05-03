@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   layout "public"
+  before_action :logged_in_user, only: [:show, :edit, :update, :set_social_media]
   
   def home
     @projects = Project.all
