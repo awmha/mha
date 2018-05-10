@@ -794,7 +794,7 @@ DIV.texthover:hover .overlay {
     padding: 0 38px;
     height: 60px;
   }
-  .navbar-nav > li > span {
+  .navbar-nav > li > span, .navbar-nav > li > a {
     padding:10px 15px 0;
   }
   footer p {
@@ -982,7 +982,7 @@ a.active {
   margin-bottom: 8px;
 }
 
-.navbar-nav > li > span {
+.navbar-nav > li > span, .navbar-inverse .navbar-nav > li > a {
   display:block;
   letter-spacing:2px
 }
@@ -1019,10 +1019,6 @@ a.active {
 .about_us p {
   font-size: 13px;
   text-align: justify;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-  letter-spacing: 2px;
 }
 
 .navbar-brand {

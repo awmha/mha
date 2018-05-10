@@ -12,11 +12,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <span class="slideup" id="work_link">Selected Work</span>
-        </li>
-        <li class="navLine">|</li>
-        <li>
-          <span class="slideupAbout" id="about_link">About Us</span>
+        <% if current_page?(contact_path) %>
+            <a href="home#res_scroll" id="work_link">Selected Work</a>
+          </li>
+          <li class="navLine">|</li>
+          <li>
+            <a href="home#about_scroll" id="about_link">About Us</a>
+        <% else %>
+            <span class="slideup" id="work_link">Selected Work</span>
+          </li>
+          <li class="navLine">|</li>
+          <li>
+            <span class="slideupAbout" id="about_link">About Us</span>
+        <% end %>
         </li>
         <li class="navLine">|</li>
         <li>

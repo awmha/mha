@@ -152,14 +152,28 @@ if ($(window).width() >= 991) {
 }
 // slide up projects if hash from url
 var h = location.hash.substr(1);
-if (h == 'selected_projects_scroll') {
+if (h == 'res_scroll') {
+  if ($(window).height() <= 1450) {
+    slideUpProjects();
+    $('.arrow-container').hide();
+    console.log('less than 1451 scroll')
+  } else {
+    $('html, body').animate({
+      scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
+    }, 2000);
+    console.log('greater than 1451 scroll')
+  }
+};
+if (h == 'ecc_scroll') {
   slideUpProjects();
-  $('.arrow-container').hide();
+  $('html, body').animate({
+    scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
+  }, 2000);
 };
 $(document).ready(function() {
   if (h == 'about_scroll') {
     $('#loadcover').hide();
-    if ($(window).width() <= 991) {
+    if (($(window).width() <= 991) || ($(window).height() >= 1451)) {
       slideUpProjects()
       $('html, body').animate({
         scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
