@@ -60,6 +60,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    require 'pry'; binding.pry
     @project = Project.find(params[:id])
     if params[:project][:main_project] == "true"
       set_as_main_project
@@ -219,7 +220,7 @@ class ProjectsController < ApplicationController
 
     def project_params
       # params.require(:project).permit(:name, :location, :user_id, pictures_attributes: [:id, :project_id, :image, :position, :_destroy])
-      params.require(:project).permit(:name, :location, :user_id, :main_project, :contact_page_project, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
+      params.require(:project).permit(:name, :location, :user_id, :main_project, :contact_page_project, :category, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
     end
 
     def correct_user

@@ -25,6 +25,11 @@
   Created by: <%= project.user.name %>
 </h4>
 
+<h4>
+  <%= f.label :category %>
+  <%= f.select :category, Project.all.pluck(:category) %>
+</h4>
+
 <h4>Main Project
   <%= f.label :main_project, "Yes", :value => true %>
   <%= f.radio_button :main_project, true %>

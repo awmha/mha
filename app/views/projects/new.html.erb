@@ -23,6 +23,11 @@
     <%= f.text_field :location %>
   </h2>
 
+  <h4>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
+  </h4>
+
 <%= file_field_tag "images[]", type: :file, multiple: true %>
 
   <div class="actions">
