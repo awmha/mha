@@ -17,3 +17,11 @@
 //= require cocoon
 //= require jquery.slick
 //= require_tree .
+//= require selectize
+
+$(function() {
+  $('#category-select').selectize({
+    create: true,
+    sortField: 'text'
+  });
+});

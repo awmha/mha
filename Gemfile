@@ -45,6 +45,7 @@ gem 'fog',                     '1.38.0'
 gem 'font-awesome-rails'
 gem 'cocoon'
 gem 'jquery-slick-rails'
+gem 'selectize-rails'
 
 group :test do
   gem 'minitest'

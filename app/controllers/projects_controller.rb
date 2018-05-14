@@ -60,7 +60,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    require 'pry'; binding.pry
     @project = Project.find(params[:id])
     if params[:project][:main_project] == "true"
       set_as_main_project

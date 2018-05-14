@@ -27,7 +27,7 @@
 
 <h4>
   <%= f.label :category %>
-  <%= f.select :category, Project.all.pluck(:category) %>
+  <%= f.select(:category, Project.all.pluck(:category), {}, { id: 'category-select' } ) %>
 </h4>
 
 <h4>Main Project
