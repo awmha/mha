@@ -59,8 +59,7 @@
   </div><!-- /.row -->
   <!-- /.container -->
 
-    <script>
-
+<script>
 
 $(function() {
   var slickOpts = {
@@ -94,29 +93,26 @@ $(function() {
     }]
   };
 
-
-
-$('#start_slick').click(function() {
-$('#new-car-1').slick(slickOpts);
-});
-
-
+  $('#start_slick').click(function() {
+    $('#new-car-1').slick(slickOpts);
+  });
     
-var click = 1
-$('.carousel').carousel({
-  interval: 5000 //changes the speed
-})
-$('.next-button-slick').click(function() {
-  $('.carousel').slickNext();
-});
-//SLIDE UP PROJECTS  
-var slideUpProjects = function() {
+  var click = 1
+  $('.carousel').carousel({
+    interval: 5000 //changes the speed
+  })
+  $('.next-button-slick').click(function() {
+    $('.carousel').slickNext();
+  });
+
+  //SLIDE UP PROJECTS  
+  var slideUpProjects = function() {
     var $this = $('#myCarousel');
     if ($this.hasClass("headerInitial")) {
       $('#myCarousel').switchClass('headerInitial', 'headerSlideUp', 1000);
       $('.pp2').hide();
       $('.nn2').hide();
-$('.container-fluid').addClass('container-fluid-opaque', 1000);
+      $('.container-fluid').addClass('container-fluid-opaque', 1000);
       $('#arrow-toggle-container').animate({
         marginTop: '0'
       }, {
@@ -125,8 +121,8 @@ $('.container-fluid').addClass('container-fluid-opaque', 1000);
       });
       setTimeout(function() {
         $('#action').removeClass('fa-angle-up');
-//hide dots new addition
-      $('.slick-dots').remove();
+        //hide dots new addition
+        $('.slick-dots').remove();
       }, 700);
       setTimeout(function() {
         $('#dashboard').fadeOut(300);
@@ -134,96 +130,99 @@ $('.container-fluid').addClass('container-fluid-opaque', 1000);
       click = 0;
     }
   }
+
   // $("#slidecontrol").click(slideUpProjects)
-$("#slide-up-hover").mouseover(slideUpProjects);
-if ($(window).width() >= 991) {
-  $(".slideup").click(slideUpProjects);
-  $(".slideupAbout").click(slideUpProjects);
-} else {
-  $(".slideup").click(slideUpProjects);
-  $(".slideupAbout").click(function() {
-    slideUpProjects()
-    $('html, body').animate({
-      scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
-    }, 2000);
-    $('.pp2').hide();
-    $('.nn2').hide();
-  });
-}
-// slide up projects if hash from url
-var h = location.hash.substr(1);
-if (h == 'res_scroll') {
-  if ($(window).height() <= 1450) {
-    slideUpProjects();
-    $('.arrow-container').hide();
-    console.log('less than 1451 scroll')
+  $("#slide-up-hover").mouseover(slideUpProjects);
+  if ($(window).width() >= 991) {
+    $(".slideup").click(slideUpProjects);
+    $(".slideupAbout").click(slideUpProjects);
   } else {
-    $('html, body').animate({
-      scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
-    }, 2000);
-    console.log('greater than 1451 scroll')
-  }
-};
-if (h == 'ecc_scroll') {
-  slideUpProjects();
-  $('html, body').animate({
-    scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
-  }, 2000);
-};
-$(document).ready(function() {
-  if (h == 'about_scroll') {
-    $('#loadcover').hide();
-    if (($(window).width() <= 991) || ($(window).height() >= 1451)) {
+    $(".slideup").click(slideUpProjects);
+    $(".slideupAbout").click(function() {
       slideUpProjects()
       $('html, body').animate({
         scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
       }, 2000);
       $('.pp2').hide();
       $('.nn2').hide();
-    } else {
+    });
+  }
+
+  // slide up projects if hash from url
+  var h = location.hash.substr(1);
+  if (h == 'res_scroll') {
+    if ($(window).height() <= 1450) {
       slideUpProjects();
       $('.arrow-container').hide();
+      console.log('less than 1451 scroll')
+    } else {
+      $('html, body').animate({
+        scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
+      }, 2000);
+      console.log('greater than 1451 scroll')
     }
-  }
-});
-// replace slick proj 1
-$(function() {
-  var slickOpts = {
-    dots: true,
-    appendDots: '#dot-holder',
-    centerMode: true,
-    accessibility: false,
-    prevArrow: $(".pp2"),
-    nextArrow: $(".nn2"),
-    centerPadding: '60px',
-    autoplay: false,
-    autoplaySpeed: 3000,
-    slidesToShow: 1,
-    lazyLoad: 'ondemand',
-    pauseOnHover: false,
-    variableWidth: true,
-    responsive: [{
-      breakpoint: 768,
-      settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 3
-      }
-    }, {
-      breakpoint: 480,
-      settings: {
-        centerMode: true,
-        centerPadding: '40px',
-        slidesToShow: 1
-      }
-    }]
   };
-  // Pause slick on click
-  $('#dashboard').on('click', function() {
-    $('#new-car-1').slick('slickPause');
+  if (h == 'ecc_scroll') {
+    slideUpProjects();
+    $('html, body').animate({
+      scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
+    }, 2000);
+  };
+  $(document).ready(function() {
+    if (h == 'about_scroll') {
+      $('#loadcover').hide();
+      if (($(window).width() <= 991) || ($(window).height() >= 1451)) {
+        slideUpProjects()
+        $('html, body').animate({
+          scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
+        }, 2000);
+        $('.pp2').hide();
+        $('.nn2').hide();
+      } else {
+        slideUpProjects();
+        $('.arrow-container').hide();
+      }
+    }
   });
-  // Replace slick function
-  function replacecarousel(car_html_file) {
+
+  // replace slick proj 1
+  $(function() {
+    var slickOpts = {
+      dots: true,
+      appendDots: '#dot-holder',
+      centerMode: true,
+      accessibility: false,
+      prevArrow: $(".pp2"),
+      nextArrow: $(".nn2"),
+      centerPadding: '60px',
+      autoplay: false,
+      autoplaySpeed: 3000,
+      slidesToShow: 1,
+      lazyLoad: 'ondemand',
+      pauseOnHover: false,
+      variableWidth: true,
+      responsive: [{
+        breakpoint: 768,
+        settings: {
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 3
+        }
+      }, {
+        breakpoint: 480,
+        settings: {
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 1
+        }
+      }]
+    };
+    // Pause slick on click
+    $('#dashboard').on('click', function() {
+      $('#new-car-1').slick('slickPause');
+    });
+    // Replace slick function
+    function replacecarousel(car_html_file) {
       $('#fade-slide-show').fadeOut(300).delay(300);
       $('#dashboard').fadeOut(300).delay(300);
       console.log('fade out dashboard')
@@ -234,132 +233,109 @@ $(function() {
       $('#footerOverflowFix').show();
       console.log('fix footer overflow')
       $('#dashboard').delay(1).queue(function(nxt) {
-//        $(this).load(car_html_file + " #dashboard", function() {
+      // $(this).load(car_html_file + " #dashboard", function() {
         $(this).html(car_html_file, function() {
-
           setTimeout(function() {
-          $('#new-car-1').slick(slickOpts);
-                console.log('slick opts')
-           $('#new-car-1').slick('setPosition', 0);
-           $('#new-car-1').slick('slickGoTo', 0, true);
-           $('#new-car-1').slick('slickPause');
+            $('#new-car-1').slick(slickOpts);
+            console.log('slick opts')
+            $('#new-car-1').slick('setPosition', 0);
+            $('#new-car-1').slick('slickGoTo', 0, true);
+            $('#new-car-1').slick('slickPause');
           }, 1);
-var varCounter = 0;
-var arrowClicked = false;
-$('.slick-arrow').click(function () {
-  arrowClicked = true;
-});
-var varName = function(){
-  if((varCounter <= 50) && (arrowClicked = false))  { 
-    varCounter++;
-    $('#new-car-1').slick("slickGoTo", 0, true);
-    $('#new-car-1').slick('slickPause');
-  } else {
-    clearInterval(varName);
-  }
-};
-setInterval(varName, 100);
+          var varCounter = 0;
+          var arrowClicked = false;
+          $('.slick-arrow').click(function () {
+            arrowClicked = true;
+          });
+          var varName = function(){
+            if((varCounter <= 50) && (arrowClicked = false)) { 
+              varCounter++;
+              $('#new-car-1').slick("slickGoTo", 0, true);
+              $('#new-car-1').slick('slickPause');
+            } else {
+              clearInterval(varName);
+            }
+          };
+          setInterval(varName, 100);
           setTimeout(function() {
             $('#new-car-1').slick('slickPlay');
           }, 5500);
           nxt();
         });
-        var $this = $('#myCarousel');
+
+      var $this = $('#myCarousel');
+      $('#dashboard').css({
+        display: 'block'
+      });
+      setTimeout(function() {
         $('#dashboard').css({
-            display: 'block'
-           });
+          marginTop: '0px'
+        });
+        $('#dashboard').fadeIn(400);
+        $('#new-car-1').slick("slickGoTo", 0);
+      }, 600);
+      setTimeout(function() {
+        $('#footerOverflowFix').hide();
+      }, 1200);
+      if ($this.hasClass("headerInitial")) {
+        $("html, body").animate({
+          scrollTop: 0
+        }, "slow");
+        $('.container-fluid').addClass('container-fluid-opaque');
+        $('#arrow-toggle-container').animate({
+          marginTop: '-28px'
+        }, {
+          duration: 1000,
+          queue: false
+        });
         setTimeout(function() {
-          $('#dashboard').css({
-            marginTop: '0px'
-          });
-          $('#dashboard').fadeIn(400);
-          $('#new-car-1').slick("slickGoTo", 0);
-        }, 600);
+          $('#action').addClass('fa-angle-up').removeClass('fa-chevron-circle-down');
+          $('.arrow-container').show();
+        }, 1000);
+        click = 1;
+      } else {
         setTimeout(function() {
-          $('#footerOverflowFix').hide();
-        }, 1200);
-        if ($this.hasClass("headerInitial")) {
+          $('#myCarousel').switchClass('headerSlideUp', 'headerInitial', 1000);
+        }, 700);
+        //scroll up
+        setTimeout(function() {
           $("html, body").animate({
             scrollTop: 0
           }, "slow");
-          $('.container-fluid').addClass('container-fluid-opaque');
-          $('#arrow-toggle-container').animate({
-            marginTop: '-28px'
-          }, {
-            duration: 1000,
-            queue: false
-          });
-          setTimeout(function() {
-            $('#action').addClass('fa-angle-up').removeClass('fa-chevron-circle-down');
-            $('.arrow-container').show();
-          }, 1000);
-          click = 1;
-        } else {
-          setTimeout(function() {
-            $('#myCarousel').switchClass('headerSlideUp', 'headerInitial', 1000);
-          }, 700);
-//scroll up
-          setTimeout(function() {
-          $("html, body").animate({
-            scrollTop: 0
-          }, "slow");
-          }, 700);
-//scroll up close
-          $('.container-fluid').addClass('container-fluid-opaque');
-          $('#arrow-toggle-container').animate({
-            marginTop: '-28px'
-          }, {
-            duration: 1000,
-            queue: false
-          });
-          setTimeout(function() {
-            $('#action').addClass('fa-angle-up').removeClass('fa-chevron-circle-down');
-            $('.arrow-container').show();
-          }, 1000);
-          click = 1;
+        }, 700);
+        //scroll up close
+        $('.container-fluid').addClass('container-fluid-opaque');
+        $('#arrow-toggle-container').animate({
+          marginTop: '-28px'
+        }, {
+          duration: 1000,
+          queue: false
+        });
+        setTimeout(function() {
+          $('#action').addClass('fa-angle-up').removeClass('fa-chevron-circle-down');
+          $('.arrow-container').show();
+        }, 1000);
+        click = 1;
         }
       });
     }
-    //REPLACE INDIVIDUAL CAROUSELS
-  <% @projects.each do |project| %>
-  $('.<%= project.name.parameterize %>').on('click', function() {
-    replacecarousel('<div id="new-car-1"> <% project.pictures.each do |picture|%><div><%= image_tag picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
-  });
-  <% end %>
-  $('.car-cnr').on('click', function() {
-    replacecarousel('car_cnr.html');
-  });
-  $('.car-hic').on('click', function() {
-    replacecarousel('car_hic.html');
-  });
-  $('.car-hr').on('click', function() {
-    replacecarousel('car_hr.html');
-  });
-  $('.car-lab').on('click', function() {
-    replacecarousel('car_lab.html');
-  });
-  $('.car-tp').on('click', function() {
-    replacecarousel('car_tp.html');
-  });
-  $('.car-uesd').on('click', function() {
-    replacecarousel('car_uesd.html');
-  });
-  $('.car-details').on('click', function() {
-    replacecarousel('car_details.html');
-  });
-  $('.car-wp').on('click', function() {
-    replacecarousel('car_wp.html');
-  });
-  $(function() {
-    $('.nav a').on('click', function() {
-      if ($('.navbar-toggle').css('display') != 'none') {
-        $(".navbar-toggle").trigger("click");
-      }
+
+      //REPLACE INDIVIDUAL CAROUSELS
+    <% @projects.each do |project| %>
+    $('.<%= project.name.parameterize %>').on('click', function() {
+      replacecarousel('<div id="new-car-1"> <% project.pictures.each do |picture|%><div><%= image_tag picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
     });
-  });
+    <% end %>
+    
+    $(function() {
+      $('.nav a').on('click', function() {
+        if ($('.navbar-toggle').css('display') != 'none') {
+          $(".navbar-toggle").trigger("click");
+        }
+      });
+    });
   });
 });
 
 
-
-  </script>
+</script>
