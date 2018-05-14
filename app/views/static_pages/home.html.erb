@@ -61,7 +61,6 @@
 
 <script>
 
-$(function() {
   var slickOpts = {
     dots: true,
     appendDots: '#dot-holder',
@@ -93,180 +92,262 @@ $(function() {
     }]
   };
 
-  $('#start_slick').click(function() {
-    $('#new-car-1').slick(slickOpts);
-  });
-    
-  var click = 1
-  $('.carousel').carousel({
-    interval: 5000 //changes the speed
-  })
-  $('.next-button-slick').click(function() {
-    $('.carousel').slickNext();
-  });
-
-  //SLIDE UP PROJECTS  
-  var slideUpProjects = function() {
-    var $this = $('#myCarousel');
-    if ($this.hasClass("headerInitial")) {
-      $('#myCarousel').switchClass('headerInitial', 'headerSlideUp', 1000);
-      $('.pp2').hide();
-      $('.nn2').hide();
-      $('.container-fluid').addClass('container-fluid-opaque', 1000);
-      $('#arrow-toggle-container').animate({
-        marginTop: '0'
-      }, {
-        duration: 1000,
-        queue: false
-      });
-      setTimeout(function() {
-        $('#action').removeClass('fa-angle-up');
-        //hide dots new addition
-        $('.slick-dots').remove();
-      }, 700);
-      setTimeout(function() {
-        $('#dashboard').fadeOut(300);
-      }, 300);
-      click = 0;
-    }
+var click = 1
+$('.carousel').carousel({
+  interval: 5000 //changes the speed
+})
+$('.next-button-slick').click(function() {
+  $('.carousel').slickNext();
+});
+//SLIDE UP PROJECTS  
+var slideUpProjects = function() {
+  var $this = $('#myCarousel');
+  if ($this.hasClass("headerInitial")) {
+    $('#myCarousel').switchClass('headerInitial', 'headerSlideUp', 1000);
+    $('.pp2').hide();
+    $('.nn2').hide();
+    $('.container-fluid').addClass('container-fluid-opaque', 1000);
+    $('#arrow-toggle-container').animate({
+      marginTop: '0'
+    }, {
+      duration: 1000,
+      queue: false
+    });
+    setTimeout(function() {
+      $('#action').removeClass('fa-angle-up');
+      //hide dots new addition
+      $('.slick-dots').remove();
+    }, 700);
+    setTimeout(function() {
+      $('#dashboard').fadeOut(300);
+    }, 300);
+    click = 0;
   }
+}
+// reorder for about us
+$(document).ready(function() {
+  $(window).on('load resize', function() {
+    reorder('#resScroll', '#aboutScroll', '#eccScroll');
+  });
+});
 
-  // $("#slidecontrol").click(slideUpProjects)
-  $("#slide-up-hover").mouseover(slideUpProjects);
-  if ($(window).width() >= 991) {
-    $(".slideup").click(slideUpProjects);
-    $(".slideupAbout").click(slideUpProjects);
+function reorder(el1, el2, el3) {
+  var $window = $(window);
+  if ($window.width() <= 991) {
+    $(el2).insertAfter(el3);
   } else {
-    $(".slideup").click(slideUpProjects);
-    $(".slideupAbout").click(function() {
+    $(el2).insertAfter(el1);
+  }
+}
+// keep about us fixed if no slide up
+function sticky_relocate() {
+  var window_top = $(window).scrollTop();
+  var div_top = $('#about_project_container').offset().top;
+  if ((window_top > div_top) && ($(window).width() > 991)) {
+    $('#aboutScroll').addClass('sticky');
+  } else {
+    $('#aboutScroll').removeClass('sticky');
+  }
+}
+$(function() {
+  $(window).on("load scroll resize", function(e) {
+    sticky_relocate();
+  })
+});
+// slide up Ecc
+var slideUpEcc = function() {
+  slideUpProjects();
+  $('html, body').animate({
+    scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
+  }, 2000);
+}
+// slide up Res
+var slideUpRes = function() {
+  $('html, body').animate({
+    scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
+  }, 2000);
+  console.log('slide up res')
+}
+// $("#slidecontrol").click(slideUpProjects)
+$("#slide-up-hover").mouseover(slideUpProjects);
+if ($(window).height() >= 1451) {
+  $(".slideupRes").click(slideUpRes);
+  $(".slideupAbout").click(slideUpRes);
+  $(".slideupEcc").click(slideUpEcc);
+} else if ($(window).width() >= 991) {
+  $(".slideupRes").click(slideUpProjects);
+  $(".slideupAbout").click(slideUpProjects);
+  $(".slideupEcc").click(slideUpEcc);
+} else {
+  $(".slideupRes").click(slideUpProjects);
+  $(".slideupAbout").click(function() {
+    slideUpProjects()
+    $('html, body').animate({
+      scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
+    }, 2000);
+    $('.pp2').hide();
+    $('.nn2').hide();
+  });
+  $(".slideupEcc").click(slideUpEcc);
+}
+// slide up projects if hash from url
+var h = location.hash.substr(1);
+if (h == 'res_scroll') {
+  if ($(window).height() <= 1450) {
+    slideUpProjects();
+    $('.arrow-container').hide();
+    console.log('less than 1451 scroll')
+  } else {
+    $('html, body').animate({
+      scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
+    }, 2000);
+    console.log('greater than 1451 scroll')
+  }
+};
+if (h == 'ecc_scroll') {
+  slideUpProjects();
+  $('html, body').animate({
+    scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
+  }, 2000);
+};
+$(document).ready(function() {
+  if (h == 'about_scroll') {
+    $('#loadcover').hide();
+    if (($(window).width() <= 991) || ($(window).height() >= 1451)) {
       slideUpProjects()
       $('html, body').animate({
         scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
       }, 2000);
       $('.pp2').hide();
       $('.nn2').hide();
-    });
-  }
-
-  // slide up projects if hash from url
-  var h = location.hash.substr(1);
-  if (h == 'res_scroll') {
-    if ($(window).height() <= 1450) {
+    } else {
       slideUpProjects();
       $('.arrow-container').hide();
-      console.log('less than 1451 scroll')
-    } else {
-      $('html, body').animate({
-        scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
-      }, 2000);
-      console.log('greater than 1451 scroll')
     }
-  };
-  if (h == 'ecc_scroll') {
-    slideUpProjects();
-    $('html, body').animate({
-      scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
-    }, 2000);
-  };
-  $(document).ready(function() {
-    if (h == 'about_scroll') {
-      $('#loadcover').hide();
-      if (($(window).width() <= 991) || ($(window).height() >= 1451)) {
-        slideUpProjects()
-        $('html, body').animate({
-          scrollTop: $("#aboutScroll").offset().top - $("#aboutScroll").height()
-        }, 2000);
-        $('.pp2').hide();
-        $('.nn2').hide();
-      } else {
-        slideUpProjects();
-        $('.arrow-container').hide();
+  }
+});
+// replace slick proj 1
+$(function() {
+  var slickOpts = {
+    dots: true,
+    appendDots: '#dot-holder',
+    centerMode: true,
+    accessibility: false,
+    prevArrow: $(".pp2"),
+    nextArrow: $(".nn2"),
+    centerPadding: '60px',
+    autoplay: false,
+    autoplaySpeed: 3000,
+    slidesToShow: 1,
+    lazyLoad: 'ondemand',
+    pauseOnHover: false,
+    variableWidth: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
       }
-    }
+    }, {
+      breakpoint: 480,
+      settings: {
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }]
+  };
+  
+  // slick options for 1 slide image
+  var slickOptsCSC = {
+    dots: false,
+    appendDots: '#dot-holder',
+    centerMode: true,
+    accessibility: false,
+    prevArrow: $(""),
+    nextArrow: $(""),
+    centerPadding: '60px',
+    autoplay: false,
+    autoplaySpeed: 3000,
+    slidesToShow: 1,
+    lazyLoad: 'ondemand',
+    pauseOnHover: false,
+    variableWidth: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }]
+  };  
+  
+  // Pause slick on click
+  $('#dashboard').on('click', function() {
+    $('#new-car-1').slick('slickPause');
   });
-
-  // replace slick proj 1
-  $(function() {
-    var slickOpts = {
-      dots: true,
-      appendDots: '#dot-holder',
-      centerMode: true,
-      accessibility: false,
-      prevArrow: $(".pp2"),
-      nextArrow: $(".nn2"),
-      centerPadding: '60px',
-      autoplay: false,
-      autoplaySpeed: 3000,
-      slidesToShow: 1,
-      lazyLoad: 'ondemand',
-      pauseOnHover: false,
-      variableWidth: true,
-      responsive: [{
-        breakpoint: 768,
-        settings: {
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
-        }
-      }]
-    };
-    // Pause slick on click
-    $('#dashboard').on('click', function() {
-      $('#new-car-1').slick('slickPause');
-    });
-    // Replace slick function
-    function replacecarousel(car_html_file) {
-      $('#fade-slide-show').fadeOut(300).delay(300);
-      $('#dashboard').fadeOut(300).delay(300);
-      console.log('fade out dashboard')
-      $('.slick-dots').remove();
-      console.log('remove dots')
-      $('#custom-pager').remove();
-      console.log('remove pager')
-      $('#footerOverflowFix').show();
-      console.log('fix footer overflow')
-      $('#dashboard').delay(1).queue(function(nxt) {
-      // $(this).load(car_html_file + " #dashboard", function() {
-        $(this).html(car_html_file, function() {
-          setTimeout(function() {
-            $('#new-car-1').slick(slickOpts);
-            console.log('slick opts')
-            $('#new-car-1').slick('setPosition', 0);
-            $('#new-car-1').slick('slickGoTo', 0, true);
-            $('#new-car-1').slick('slickPause');
-          }, 1);
-          var varCounter = 0;
-          var arrowClicked = false;
-          $('.slick-arrow').click(function () {
-            arrowClicked = true;
-          });
-          var varName = function(){
-            if((varCounter <= 50) && (arrowClicked = false)) { 
-              varCounter++;
-              $('#new-car-1').slick("slickGoTo", 0, true);
-              $('#new-car-1').slick('slickPause');
-            } else {
-              clearInterval(varName);
-            }
-          };
-          setInterval(varName, 100);
-          setTimeout(function() {
-            $('#new-car-1').slick('slickPlay');
-          }, 5500);
-          nxt();
-        });
-
-      var $this = $('#myCarousel');
-      $('#dashboard').css({
-        display: 'block'
+  // Replace slick function
+  function replacecarousel(car_html_file) {
+    console.log('start replace')
+    $('#fade-slide-show').fadeOut(300).delay(300);
+    $('#dashboard').fadeOut(300).delay(300);
+    $('.slick-dots').remove();
+    $('#custom-pager').remove();
+    $('#footerOverflowFix').show();
+    console.log('1 delay')
+    $('#dashboard').delay(1).queue(function(nxt) {
+      $(this).html(car_html_file + " #dashboard", function() {
+        console.log('another time out')
+        // setTimeout(function() {
+        //     // if one slide image
+        //     if (car_html_file == 'car_csc.html') {
+        //       console.log('slick options CSC')
+        //       $('#new-car-1').slick(slickOptsCSC);
+        //     } else {
+        //         console.log('slick options')
+        //       $('#new-car-1').slick(slickOpts);
+        //     }
+        //   console.log('set position 0')
+        //   $('#new-car-1').slick("setPosition", 0);
+        //   console.log('go to 0')
+        //   $('#new-car-1').slick("slickGoTo", 0, true);
+        // }, 1);
       });
+      $('#new-car-1').slick(slickOpts);
+      var varCounter = 0;
+      var stopInterval = false;
+      var interval = setInterval(function() {
+        if ((varCounter <= 50) && (!stopInterval)) {
+          $('.slick-arrow, .slick-dots').click(function() {
+            stopInterval = true;
+          });
+          $('#new-car-1').slick("slickGoTo", 0, true);
+          console.log('go to 0 interval')
+          $('#new-car-1').slick('slickPause');
+          varCounter++;
+        } else if (car_html_file == 'car_csc.html') {
+            // for slide with just 1 image
+            clearInterval(interval);
+              console.log('csc')
+              $('#new-car-1').slick('slickPause');
+          } else {
+          clearInterval(interval);
+          console.log('clear interval and stop 0 and play')
+          $('#new-car-1').slick('slickPlay');
+        }
+      }, 100)
+      nxt();
+      
+      var $this = $('#myCarousel');
       setTimeout(function() {
         $('#dashboard').css({
           marginTop: '0px'
@@ -290,7 +371,12 @@ $(function() {
         });
         setTimeout(function() {
           $('#action').addClass('fa-angle-up').removeClass('fa-chevron-circle-down');
-          $('.arrow-container').show();
+          if (car_html_file == 'car_csc.html') {
+              $('.arrow-container').hide();
+              console.log('csc header open hide arrows')
+          } else {
+              $('.arrow-container').show();
+          }
         }, 1000);
         click = 1;
       } else {
@@ -316,26 +402,22 @@ $(function() {
           $('.arrow-container').show();
         }, 1000);
         click = 1;
-        }
-      });
-    }
-
-      //REPLACE INDIVIDUAL CAROUSELS
+      }
+    });
+  }
+  //REPLACE INDIVIDUAL CAROUSELS
     <% @projects.each do |project| %>
     $('.<%= project.name.parameterize %>').on('click', function() {
       replacecarousel('<div id="new-car-1"> <% project.pictures.each do |picture|%><div><%= image_tag picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
     });
     <% end %>
-    
-    $(function() {
-      $('.nav a').on('click', function() {
-        if ($('.navbar-toggle').css('display') != 'none') {
-          $(".navbar-toggle").trigger("click");
-        }
-      });
+
+  $(function() {
+    $('.nav a').on('click', function() {
+      if ($('.navbar-toggle').css('display') != 'none') {
+        $(".navbar-toggle").trigger("click");
+      }
     });
   });
 });
-
-
 </script>
