@@ -2,17 +2,16 @@
 
 <h1>Projects</h1>
 
-
-
-
-
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Location</th>
+      <th>Main Project?</th>
+      <th>Contact Page?</th>
+      <th>Category</th>
       <th>Images</th>
-      <th>User Name</th>
+      <th>Username</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,6 +21,9 @@
       <tr>
         <td><%= project.name %></td>
         <td><%= project.location %></td>
+        <td><%= project.main_project %></td>
+        <td><%= project.contact_page_project %></td>
+        <td><%= project.category %></td>
         <td><%= project.pictures.count %></td>
         <td><%= project.user.name %></td>
         <td><%= link_to 'Show', project %></td>

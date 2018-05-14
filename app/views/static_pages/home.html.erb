@@ -1,68 +1,63 @@
 <div class="arrow-container">
-    <i aria-hidden="true" class="fa fa-angle-left pp2"></i> <i aria-hidden="true" class="fa fa-angle-right nn2"></i>
-  </div>
-  <div class="dot-container"></div>
-  <header class="carousel slide headerInitial" id="myCarousel">
-    <div class="cycle-slideshow" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" id="fade-slide-show" style="height:100%;">  
-    <% main_project = @projects.find_by(main_project: true) %>
+  <i aria-hidden="true" class="fa fa-angle-left pp2"></i> <i aria-hidden="true" class="fa fa-angle-right nn2"></i>
+</div>
+<div class="dot-container"></div>
+<header class="carousel slide headerInitial" id="myCarousel">
+  <div class="cycle-slideshow" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" id="fade-slide-show" style="height:100%;">  
     <% main_project.pictures.each do |picture| %>
       <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;"></div>
     <% end %>
+  </div>
+  <div id="dashboard"></div>
+  <div class="slide"></div>
+</header>
+<div class="container-fluid" id="about_project_container">
+  <div class="row" id="slidecontrol">
+    <div id="slide-up-hover">
+      <i aria-hidden="true" class="fa fa-angle-up" id="action" style="font-size:36px;line-height:60px"></i>
     </div>
-    <div id="dashboard"></div>
-    <div class="slide"></div>
-  </header>
-  <div class="container-fluid" id="about_project_container">
-    <div class="row" id="slidecontrol">
-      <div id="slide-up-hover">
-        <i aria-hidden="true" class="fa fa-angle-up" id="action" style="font-size:36px;line-height:60px"></i>
-      </div>
-<div id="dot-holder"></div>
-
+  <div id="dot-holder"></div>
+</div>
+<div class="col-md-9 first col-sm-12 pull-right">
+  <div class="section">
+    <div class="panel-heading">
+      <a id="selected_projects" name="selected_projects"></a>
+      <h4>Selected Work</h4>
     </div>
-    <div class="col-md-9 first col-sm-12 pull-right">
-      <div class="section">
-        <div class="panel-heading">
-          <a id="selected_projects" name="selected_projects"></a>
-          <h4>Selected Work</h4>
-        </div>
-        <div class="panel-body">
-          <% @projects.each do |project| %>
-          <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
-            <div class="texthover">
-              <%= image_tag project.pictures.first.image, class: "img-responsive img-portfolio img-hover" %>
-              <div class="overlay <%= project.name.parameterize %>">
-                <div class="overlay-container">
-                  <p class="project-name"><%= project.name %></p>
-                  <p class="location"><%= project.location %></p>
-                </div>
-              </div>
+    <div class="panel-body">
+      <% projects_for_carousel.each do |project| %>
+      <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
+        <div class="texthover">
+          <%= image_tag project.pictures.first.image, class: "img-responsive img-portfolio img-hover" %>
+          <div class="overlay <%= project.name.parameterize %>">
+            <div class="overlay-container">
+              <p class="project-name"><%= project.name %></p>
+              <p class="location"><%= project.location %></p>
             </div>
           </div>
-          <% end %>
         </div>
       </div>
-    </div><!-- second -->
-    <div class="col-md-3 second col-sm-12 pull-left" id="aboutScroll">
-      <div class="section">
-        <div class="panel-heading">
-          <a id="About" name="About"></a>
-          <h4>About Us</h4>
-        </div>
-        <div class="panel panel-default" style="background-color: transparent;">
-          <div class="panel-body about_us">
-            <p><%= simple_format h(@static_page_info.about_us) %></p>
-          </div>
-        </div>
+      <% end %>
+    </div>
+  </div>
+</div><!-- second -->
+<div class="col-md-3 second col-sm-12 pull-left" id="aboutScroll">
+  <div class="section">
+    <div class="panel-heading">
+      <a id="About" name="About"></a>
+      <h4>About Us</h4>
+    </div>
+    <div class="panel panel-default" style="background-color: transparent;">
+      <div class="panel-body about_us">
+        <p><%= simple_format h(@static_page_info.about_us) %></p>
       </div>
-    </div><!-- first -->
-  </div><!-- /.row -->
-  <!-- /.container -->
+    </div>
+  </div>
+</div><!-- first -->
+</div><!-- /.row -->
+<!-- /.container -->
 
 <script>
-
-
-
 var click = 1
 $('.carousel').carousel({
   interval: 5000 //changes the speed
@@ -377,9 +372,9 @@ $(function() {
     });
   }
   //REPLACE INDIVIDUAL CAROUSELS
-    <% @projects.each do |project| %>
+    <% projects_for_carousel.each do |project| %>
     $('.<%= project.name.parameterize %>').on('click', function() {
-      replacecarousel('<div id="new-car-1"> <% project.pictures.each do |picture|%><div><%= image_tag picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
+      replacecarousel('<div id="new-car-1"><% project.pictures.each do |picture|%><div><%= image_tag picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
     });
     <% end %>
 
