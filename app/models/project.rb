@@ -15,7 +15,6 @@ class Project < ApplicationRecord
   def add_initial_position
     n = 1
     self.project_pictures.each do |project_picture|
-      require 'pry'; binding.pry
       project_picture.position = n
       n += 1
     end
@@ -41,5 +40,10 @@ class Project < ApplicationRecord
   def contact_page_project_default
     self.contact_page_project = false
     self.save
+  end
+
+  def project_category_list
+    project_category_list = ["main", "contact", "residential", "no_display", "ecclesiastical"] << Project.all.pluck(:category)
+    project_category_list.flatten.uniq
   end
 end
