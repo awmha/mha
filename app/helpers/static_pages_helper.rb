@@ -8,6 +8,7 @@ module StaticPagesHelper
   end
 
   def projects_for_carousel
-    @projects.where.not(category: "main").where.not(category: "contact")
+    no_display = ["no_display", "contact", "main"]
+    @projects.where.not(category: no_display)
   end
 end

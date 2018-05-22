@@ -61,10 +61,10 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if params[:project][:main_project] == "true"
+    if params[:project][:category] == "main"
       set_as_main_project
     end
-    if params[:project][:contact_page_project] == "true"
+    if params[:project][:category] == "contact"
       set_as_contact_page_project
     end
     if @project.update_attributes(project_params)
