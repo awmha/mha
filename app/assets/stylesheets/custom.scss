@@ -122,19 +122,6 @@ p {
   margin-left: 0;
 }
 
-table.project_edit {
-  width:100%;
-}
-
-table.project_edit, table.project_edit td, table.project_edit th {
-  border: 1px solid #000;
-  padding:2px
-}
-
-table.project_edit > thead > tr > th, table.project_edit > tbody > tr > td {
-  text-align:center
-}
-
 body {
   font-family: 'PT Sans', Helvetica, Arial, sans-serif;
   color: #666769;
@@ -1394,6 +1381,9 @@ ul.nav {
   vertical-align: middle;
 }
 .navbar-toggle {
-    margin-top: 12px;margin-right:0px}
+  margin-top: 12px;margin-right:0px
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {background-color:#fff;}
 
 /*# sourceMappingURL=bootstrap.css.map */

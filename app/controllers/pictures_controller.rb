@@ -5,6 +5,9 @@ class PicturesController < ApplicationController
     @pictures = Picture.all
   end
 
+  def show
+  end
+
   def create
     @picture = Picture.new(picture_params)
     @picture.save

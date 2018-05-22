@@ -2,45 +2,36 @@
 
 <h1>Projects</h1>
 
-<table>
+<table class="table table-striped table-hover text-center">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Main Project?</th>
-      <th>Contact Page?</th>
-      <th>Category</th>
-      <th>Images</th>
-      <th>Username</th>
-      <th colspan="3"></th>
+      <th class="text-center">Thumb</th>
+      <th class="text-center">Name</th>
+      <th class="text-center">Location</th>
+      <th class="text-center">Category</th>
+      <th class="text-center">Images</th>
+      <th class="text-center">Username</th>
+      <th colspan="3" class="text-center">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @projects.each do |project| %>
       <tr>
+        <td><%= image_tag project.pictures.first.image, style:"height:100px;float:left;margin:5px" if project.pictures %></td>
         <td><%= project.name %></td>
         <td><%= project.location %></td>
-        <td><%= project.main_project %></td>
-        <td><%= project.contact_page_project %></td>
         <td><%= project.category %></td>
         <td><%= project.pictures.count %></td>
         <td><%= project.user.name %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <tr>
-        <td colspan="5">
-          <% project.pictures.first do |image| %>
-          <%= image_tag image.image, style:"height:100px;float:left;margin:5px" if project.pictures %>
-          <% end %>
-        </td>
+        <td><%= link_to 'Show', project, :class => "btn btn-info" %></td>
+        <td><%= link_to 'Edit', edit_project_path(project), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<p class="bg-warning">The following categories will NOT display as clickable projects on homepage: <b>Main</b>, <b>Contact</b>, <b>No Display</b>.  All other categories will be listed in header and separated on homepage.</p>
 <br>
 
 <%= link_to 'New Project', new_project_path %>
