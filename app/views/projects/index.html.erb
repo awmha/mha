@@ -18,7 +18,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= image_tag project.pictures.first.image, style:"height:100px;float:left;margin:5px" if project.pictures %></td>
+        <td><%= image_tag project.pictures.first.image, style:"height:100px;float:left;margin:5px" if !project.pictures.empty? %></td>
         <td><%= project.name %></td>
         <td><%= project.location %></td>
         <td><%= project.category %></td>
