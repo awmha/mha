@@ -11,8 +11,6 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    # @project = Project.new
-    # @picture = @project.pictures.build
     @project = Project.new
     @project_pictures = @project.project_pictures.build
   end
@@ -40,33 +38,22 @@ class ProjectsController < ApplicationController
       flash[:alert] = "Something went wrong."
       render :new
     end
-
-    # @project = current_user.projects.new(project_params)
-    # @project.pictures << Picture.new(params[:images])
-
-    # @project = current_user.projects.build(project_params)
-    # if @project.save
-    #   if params[:images]
-    #     params[:images].each { |image|
-    #       @project.pictures.create(image: image)
-    #     }
-    #   end
-    #   flash[:notice] = "Your project has been created."
-    #   redirect_to @project
-    # else 
-    #   flash[:alert] = "Something went wrong."
-    #   render :new
-    # end
   end
 
   def update
     @project = Project.find(params[:id])
     if params[:project][:category] == "main"
+      #if another project is already MAIN, sets to no display
       set_as_main_project
     end
     if params[:project][:category] == "contact"
       set_as_contact_page_project
     end
+    if @project.category == "main" && params[:project][:category] != "main"
+      flash[:danger] = "Cannot change category from MAIN. First set a different project as MAIN and then change the category of the former MAIN project."
+      redirect_to projects_url and return
+    end
+
     if @project.update_attributes(project_params)
       if params[:images]
         params[:images].each { |image|
@@ -79,7 +66,7 @@ class ProjectsController < ApplicationController
         end
       end
 
-      flash[:notice] = "Project has been updated."
+      flash[:success] = "Project has been updated."
       redirect_to @project
     else
       render :edit
@@ -203,22 +190,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def set_main_project
-    require 'pry'
-    binding.pry
-    # new_main_project_id = params[:main_project].to_i
-    # new_main_project = Project.find(new_main_project_id)
-
-    redirect_to projects_path
-  end
-
   private
     def set_project
       @project = Project.find(params[:id])
     end
 
     def project_params
-      # params.require(:project).permit(:name, :location, :user_id, pictures_attributes: [:id, :project_id, :image, :position, :_destroy])
       params.require(:project).permit(:name, :location, :user_id, :main_project, :contact_page_project, :category, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
     end
 
