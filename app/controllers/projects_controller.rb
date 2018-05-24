@@ -32,10 +32,10 @@ class ProjectsController < ApplicationController
         @project.save
       end
 
-      flash[:notice] = "Your project has been created."
+      flash[:success] = "Your project has been created."
       redirect_to @project
     else 
-      flash[:alert] = "Something went wrong."
+      flash[:danger] = "Something went wrong."
       render :new
     end
   end
@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if params[:project][:category] == "main"
-      #if another project is already MAIN, sets to no display
+      #if another project is already MAIN, sets to no_display
       set_as_main_project
     end
     if params[:project][:category] == "contact"
@@ -51,6 +51,10 @@ class ProjectsController < ApplicationController
     end
     if @project.category == "main" && params[:project][:category] != "main"
       flash[:danger] = "Cannot change category from MAIN. First set a different project as MAIN and then change the category of the former MAIN project."
+      redirect_to projects_url and return
+    end
+    if @project.category == "contact" && params[:project][:category] != "contact"
+      flash[:danger] = "Cannot change category from CONTACT. First set a different project as CONTACT and then change the category of the former CONTACT project."
       redirect_to projects_url and return
     end
 
@@ -79,7 +83,7 @@ class ProjectsController < ApplicationController
       flash[:success] = "Project has been deleted."
       redirect_to projects_url
     else
-      flash[:error] = "Couldn't delete the project."
+      flash[:danger] = "Couldn't delete the project."
       redirect_to(:back)
     end
   end
@@ -88,7 +92,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project])
     old_position = params[:image_position].to_i
     if old_position == 1
-      flash[:error] = "Image is already first.  Can't move it up."
+      flash[:danger] = "Image is already first.  Can't move it up."
       redirect_to edit_project_path
     else
       new_position = old_position - 1
@@ -114,7 +118,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project])
     old_position = params[:image_position].to_i
     if old_position == @project.project_pictures.count
-      flash[:error] = "Image is already last.  Can't move it down."
+      flash[:danger] = "Image is already last. Can't move it down."
       redirect_to edit_project_path
     elsif old_position == 0
 
@@ -125,7 +129,7 @@ class ProjectsController < ApplicationController
       ratio = width/height
 
       if ratio.round(2) != 1.56
-        flash[:error] = "You cannot move this picture down as the image below cannot be made a thumbnail as the ratio between width and height must be 1.56"
+        flash[:danger] = "You cannot move this picture down as the image below cannot be made a thumbnail as the ratio between width and height must be 1.56"
         redirect_to edit_project_path and return
       else
         new_position = old_position + 1
@@ -156,10 +160,10 @@ class ProjectsController < ApplicationController
     ratio = width/height
 
     if ratio.round(2) != 1.56
-      flash[:error] = "Incorrect dimensions for thumbnail. Ratio between width and height must be 1.56"
+      flash[:danger] = "Incorrect dimensions for thumbnail. Ratio between width and height must be 1.56"
       redirect_to edit_project_path
     elsif old_position == 0
-      flash[:error] = "Image is already set to thumbnail."
+      flash[:danger] = "Image is already set to thumbnail."
       redirect_to edit_project_path
     elsif @project.project_pictures.where(position: 0).present?
       original_thumb = @project.project_pictures.find_by(position: 0)
@@ -196,7 +200,7 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:name, :location, :user_id, :main_project, :contact_page_project, :category, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
+      params.require(:project).permit(:name, :location, :user_id, :category, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
     end
 
     def correct_user

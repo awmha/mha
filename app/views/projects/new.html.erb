@@ -13,20 +13,16 @@
     </div>
   <% end %>
 
-  <h1>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </h1>
+<p><%= f.label :name %>
+<%= f.text_field :name %></p>
 
-  <h2>
-    <%= f.label :location %>
-    <%= f.text_field :location %>
-  </h2>
+<p><%= f.label :location %>
+<%= f.text_field :location %></p>
 
-  <h4>
+  <p>
     <%= f.label :category %>
-    <%= f.text_field :category %>
-  </h4>
+    <%= f.select(:category, @project.project_category_list, {}, { id: 'category-select' } ) %>
+  </p>
 
 <%= file_field_tag "images[]", type: :file, multiple: true %>
 

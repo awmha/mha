@@ -3,10 +3,10 @@ class Project < ApplicationRecord
   has_many :project_pictures, dependent: :destroy
   has_many :pictures, through: :project_pictures
   validates :name, :location, length: { maximum: 50 }
-  validates :name, :location, :user_id, presence: true
+  validates :name, :user_id, presence: true
   # has_many :pictures, :inverse_of => :project, :dependent => :destroy
   accepts_nested_attributes_for :project_pictures, allow_destroy: true
-  after_create :main_picture_default, :contact_page_project_default
+  after_create :main_picture_default
 
   def self.with_pictures
     includes(:pictures)
@@ -33,12 +33,7 @@ class Project < ApplicationRecord
   end
 
   def main_picture_default
-    self.main_project = false
-    self.save
-  end
-
-  def contact_page_project_default
-    self.contact_page_project = false
+    self.category != "main"
     self.save
   end
 
