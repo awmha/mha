@@ -28,7 +28,11 @@
           <% end %>
         </td>
         <td><%= link_to 'Show', picture.image.url, target: :_blank, :class => "btn btn-info" %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
+        <td>
+          <% if picture.project_pictures.blank? %>
+            <%= link_to 'Destroy', picture, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-danger" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

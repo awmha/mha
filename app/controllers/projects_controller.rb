@@ -31,7 +31,6 @@ class ProjectsController < ApplicationController
         @project.add_initial_position
         @project.save
       end
-
       flash[:success] = "Your project has been created."
       redirect_to @project
     else 
@@ -69,7 +68,7 @@ class ProjectsController < ApplicationController
           @project.add_new_position
         end
       end
-
+      @project.save
       flash[:success] = "Project has been updated."
       redirect_to @project
     else
@@ -103,7 +102,6 @@ class ProjectsController < ApplicationController
 
     new_higher_image = @project.project_pictures.find_by(position: old_position)
     new_higher_image.position = new_position
-
 
     # @project.project_pictures.insert(new_position, @project.project_pictures.delete_at(old_position))
     new_higher_image.save
