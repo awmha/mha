@@ -22,11 +22,10 @@
   <div class="section">
     <div class="panel-heading">
       <a id="selected_projects" name="selected_projects"></a>
-      <h4>Selected Work</h4>
+      <h4>Residential</h4>
     </div>
     <div class="panel-body">
-
-      <% projects_for_carousel.each do |project| %>
+      <% projects_for_carousel.where(category: "residential").each do |project| %>
       <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
         <div class="texthover">
           <%= image_tag project.pictures.first.image, class: "img-responsive img-portfolio img-hover" %>
@@ -60,43 +59,25 @@
   <div class="section">
     <div class="panel-heading">
       <a id="selected_projects" name="ecc_projects"></a>
-      <h4>Ecclesiastical</h4>
+      <h4>ecclesiastical</h4>
     </div>
     <div class="panel-body">
-      <div class="col-lg-4 col-md-6 col-sm-6">
+      <% projects_for_carousel.where(category: "ecclesiastical").each do |project| %>
+      <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
         <div class="texthover">
-          <img alt="New Parish Church" class="img-responsive img-portfolio img-hover" src="images/ecc/stmt.jpg">
-          <div class="overlay car-stm">
+          <%= image_tag project.pictures.first.image, class: "img-responsive img-portfolio img-hover" %>
+          <div class="overlay <%= project.name.parameterize %>">
             <div class="overlay-container">
-              <p class="project-name">New Parish Church</p>
+              <p class="project-name"><%= project.name %></p>
+              <p class="location"><%= project.location %></p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="texthover">
-          <img alt="College Chapel Renovation" class="img-responsive img-portfolio img-hover" src="images/ecc/ccrt.jpg">
-          <div class="overlay car-ccr">
-            <div class="overlay-container">
-              <p class="project-name">College Chapel Renovation</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="texthover">
-          <img alt="Catholic Student Center" class="img-responsive img-portfolio img-hover" src="images/ecc/csct.jpg">
-          <div class="overlay car-csc">
-            <div class="overlay-container">
-              <p class="project-name">Catholic Student Center</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
-
 
 </div><!-- /.row -->
 <!-- /.container -->
