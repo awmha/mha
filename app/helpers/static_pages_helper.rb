@@ -1,6 +1,12 @@
 module StaticPagesHelper
   def main_project
-    @projects.find_by(category: "main")
+    main_project = @projects.find_by(category: "main")
+
+    if main_project.nil?
+      return @projects.first
+    end
+
+    main_project
   end
 
   def contact_project

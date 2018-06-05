@@ -3,9 +3,9 @@
 </div>
 <div class="dot-container"></div>
 <header class="carousel slide headerInitial" id="myCarousel">
-  <div class="cycle-slideshow" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" id="fade-slide-show" style="height:100%;">  
-    <% main_project.pictures.each do |picture| %>
-      <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;"></div>
+  <div class="cycle-slideshow" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" id="fade-slide-show" style="height:100%;">
+    <% main_project.project_pictures.each do |pp| %>
+      <div class="newSlide" style="background:url('<%= pp.picture.image %>') no-repeat center center / cover;"></div>
     <% end %>
   </div>
   <div id="dashboard"></div>
