@@ -15,3 +15,5 @@ users = User.order(:created_at).take(6)
   location = city + ", " + state
   users.each { |user| user.projects.create!(name: name.to_sentence.titleize.gsub(",",''), location: location) }
 end
+
+StaticPage.create!(company_name: "Company Name", about_us: "About us text")

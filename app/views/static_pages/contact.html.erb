@@ -109,15 +109,19 @@ body {height:100%;overflow:hidden}
       <div class="item active" style="">
         <div class="center" style="height:100%">
           <div class="cycle-slideshow left-slide" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="1" id="fade-slide-show">
-            <% contact_project.pictures.each do |picture| %>
-              <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+            <% if !contact_project.nil? %>
+              <% contact_project.pictures.each do |picture| %>
+                <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+              <% end %>
             <% end %>
           </div>
           <div class="cycle-slideshow left-slide" data-ride="carousel" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="1" id="fade-slide-show">
-            <% picture_order = contact_project.pictures[1..-1] + [contact_project.pictures[0]] %>
-              <% picture_order.each do |picture| %>
-                <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
-              <% end %>
+            <% if !contact_project.nil? %>
+              <% picture_order = contact_project.pictures[1..-1] + [contact_project.pictures[0]] %>
+                <% picture_order.each do |picture| %>
+                  <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+                <% end %>
+            <% end %>
           </div>
           <div class="contact-responsive2 col-lg-4 col-md-4 col-sm-8 col-xs-12">
             <p class="first"><%= @static_page_info.contact_text %></p><br>
@@ -137,9 +141,11 @@ body {height:100%;overflow:hidden}
             </div>
           </div>
           <div class="cycle-slideshow right-slide" data-cycle-auto-height="false" data-cycle-fx="fade" data-cycle-manual-speed="2000" data-cycle-pager="#custom-pager" data-cycle-pager-template="&lt;strong&gt;&bull;&lt;/strong&gt;" data-cycle-slides="div.newSlide" data-cycle-timeout="5000" data-index="2" id="fade-slide-show">
-            <% picture_order = contact_project.pictures[2..-1] + contact_project.pictures[0,1] %>
-              <% picture_order.each do |picture| %>
-              <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+            <% if !contact_project.nil? %>
+              <% picture_order = contact_project.pictures[2..-1] + contact_project.pictures[0,1] %>
+                <% picture_order.each do |picture| %>
+                <div class="newSlide" style="background:url('<%= picture.image %>') no-repeat center center / cover;height:100%;width:100%;"></div>
+              <% end %>
             <% end %>
           </div>
         </div>

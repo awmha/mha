@@ -12,14 +12,14 @@ class StaticPagesController < ApplicationController
 
   def show
     @static_page = StaticPage.find(params[:id])
-
-    render layout: 'admin'
+    
+    render layout: 'application'
   end
 
   def edit
     @static_page = StaticPage.find(params[:id])
 
-    render layout: 'admin'
+    render layout: 'application'
   end
 
   def update
