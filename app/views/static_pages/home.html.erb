@@ -26,7 +26,7 @@
     </div>
     <div class="panel-body">
       <% projects_for_carousel.where(category: "residential").each do |project| %>
-      <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
+      <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
         <div class="texthover">
           <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
           <div class="overlay <%= project.name.parameterize %>">
@@ -63,7 +63,7 @@
       </div>
       <div class="panel-body">
         <% projects_for_carousel.where(category: "ecclesiastical").each do |project| %>
-        <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
+        <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
           <div class="texthover">
             <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
             <div class="overlay <%= project.name.parameterize %>">
