@@ -28,7 +28,7 @@
       <% projects_for_carousel.where(category: "residential").each do |project| %>
       <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
         <div class="texthover">
-          <%= image_tag project.pictures.first.image, class: "img-responsive img-portfolio img-hover" %>
+          <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
           <div class="overlay <%= project.name.parameterize %>">
             <div class="overlay-container">
               <p class="project-name"><%= project.name %></p>
@@ -65,7 +65,7 @@
         <% projects_for_carousel.where(category: "ecclesiastical").each do |project| %>
         <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0">
           <div class="texthover">
-            <%= image_tag project.pictures.first.image, class: "img-responsive img-portfolio img-hover" %>
+            <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
             <div class="overlay <%= project.name.parameterize %>">
               <div class="overlay-container">
                 <p class="project-name"><%= project.name %></p>
@@ -400,7 +400,7 @@ $(function() {
   //REPLACE INDIVIDUAL CAROUSELS
     <% projects_for_carousel.each do |project| %>
     $('.<%= project.name.parameterize %>').on('click', function() {
-      replacecarousel('<div id="new-car-1"><% project.pictures.each do |picture|%><div><%= image_tag picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
+      replacecarousel('<div id="new-car-1"><% gallery_images(project).each do |pp|%><div><%= image_tag pp.picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
     });
     <% end %>
 

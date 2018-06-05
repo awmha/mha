@@ -29,6 +29,8 @@
       <td>
         <%= link_to image_url(project_picture.picture.image), :target => "_blank" do %>
           <%= image_tag project_picture.picture.image, style:"height:200px" if @project.pictures %>
+          <br/>
+          <%= project_picture.picture.image %>
         <% end %>
       </td>
       <td>
