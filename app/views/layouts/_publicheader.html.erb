@@ -11,17 +11,22 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li>
         <% if current_page?(contact_path) %>
-            <a href="home#res_scroll" id="work_link">Selected Work</a>
-          </li>
-          <li class="navLine">|</li>
-          <li>
-            <a href="home#about_scroll" id="about_link">About Us</a>
+          <% categories_for_header.each do |category| %>
+            <li>
+              <a class="slideup" href="<%= root_path %>#<%= category %>" id="work_link"><%= category %></a>
+            </li>
+            <li class="navLine">|</li>
+          <% end %>
+            <li>
+              <a href="<%= root_path %>#about_scroll" id="about_link">About Us</a>
         <% else %>
-            <span class="slideup" id="work_link">Selected Work</span>
-          </li>
-          <li class="navLine">|</li>
+          <% categories_for_header.each do |category| %>
+            <li>
+              <span class="slideup<%= category %>" id="work_link"><%= category %></span>
+            </li>
+            <li class="navLine">|</li>
+          <% end %>
           <li>
             <span class="slideupAbout" id="about_link">About Us</span>
         <% end %>

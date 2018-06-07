@@ -18,6 +18,10 @@ module StaticPagesHelper
     @projects.where.not(category: no_display)
   end
 
+  def categories_for_header
+    projects_for_carousel.pluck(:category).uniq
+  end
+
   def get_thumbnail(project)
     if project.project_pictures.find_by(position: 0).nil?
       return project.project_pictures.first.picture.image
