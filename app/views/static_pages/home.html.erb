@@ -18,14 +18,14 @@
     </div>
   <div id="dot-holder"></div>
 </div>
-<div class="col-md-9 first col-sm-12 pull-right" id="resScroll">
+<div class="col-md-9 first col-sm-12 pull-right" id="<%= categories_for_header.first %>Scroll">
   <div class="section">
     <div class="panel-heading">
       <a id="selected_projects" name="selected_projects"></a>
-      <h4>Residential</h4>
+      <h4><%= categories_for_header.first %></h4>
     </div>
     <div class="panel-body">
-      <% projects_for_carousel.where(category: "residential").each do |project| %>
+      <% projects_for_carousel.where(category: categories_for_header.first).each do |project| %>
       <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
         <div class="texthover">
           <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
@@ -40,7 +40,7 @@
       <% end %>
     </div>
   </div>
-</div><!-- second -->
+</div>
 <div class="col-md-3 second col-sm-12 pull-left" id="aboutScroll">
   <div class="section">
     <div class="panel-heading">
@@ -53,16 +53,16 @@
       </div>
     </div>
   </div>
-</div><!-- first -->
-<% if !projects_for_carousel.where(category: "ecclesiastical").blank? %>
-  <div class="col-md-9 first col-sm-12 pull-right" id="eccScroll">
+</div>
+<% categories_for_header[1..-1].each_with_index do |category, i| %>
+  <div class="col-md-9 first col-sm-12 pull-right" id="<%= category %>Scroll">
     <div class="section">
       <div class="panel-heading">
         <a id="selected_projects" name="ecc_projects"></a>
-        <h4>ecclesiastical</h4>
+        <h4><%= category %></h4>
       </div>
       <div class="panel-body">
-        <% projects_for_carousel.where(category: "ecclesiastical").each do |project| %>
+        <% projects_for_carousel.where(category: category).each do |project| %>
         <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
           <div class="texthover">
             <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
@@ -119,7 +119,7 @@ var slideUpProjects = function() {
 // reorder for about us
 $(document).ready(function() {
   $(window).on('load resize', function() {
-    reorder('#resScroll', '#aboutScroll', '#eccScroll');
+    reorder('#<%= categories_for_header.first %>Scroll', '#aboutScroll', '#<%= categories_for_header.second %>Scroll');
   });
 });
 
@@ -150,28 +150,28 @@ $(function() {
 var slideUpEcc = function() {
   slideUpProjects();
   $('html, body').animate({
-    scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
+    scrollTop: $("#<%= categories_for_header.second %>Scroll").offset().top - $("#<%= categories_for_header.second %>Scroll").height()
   }, 2000);
 }
 // slide up Res
 var slideUpRes = function() {
   $('html, body').animate({
-    scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
+    scrollTop: $("#<%= categories_for_header.first %>Scroll").offset().top - $("#<%= categories_for_header.first %>Scroll").height()
   }, 2000);
   console.log('slide up res')
 }
 // $("#slidecontrol").click(slideUpProjects)
 $("#slide-up-hover").mouseover(slideUpProjects);
 if ($(window).height() >= 1451) {
-  $(".slideupRes").click(slideUpRes);
+  $(".slideup<%= categories_for_header.first %>").click(slideUpRes);
   $(".slideupAbout").click(slideUpRes);
-  $(".slideupEcc").click(slideUpEcc);
+  $(".slideup<%= categories_for_header.second %>").click(slideUpEcc);
 } else if ($(window).width() >= 991) {
-  $(".slideupRes").click(slideUpProjects);
+  $(".slideup<%= categories_for_header.first %>").click(slideUpProjects);
   $(".slideupAbout").click(slideUpProjects);
-  $(".slideupEcc").click(slideUpEcc);
+  $(".slideup<%= categories_for_header.second %>").click(slideUpEcc);
 } else {
-  $(".slideupRes").click(slideUpProjects);
+  $(".slideup<%= categories_for_header.first %>").click(slideUpProjects);
   $(".slideupAbout").click(function() {
     slideUpProjects()
     $('html, body').animate({
@@ -180,7 +180,7 @@ if ($(window).height() >= 1451) {
     $('.pp2').hide();
     $('.nn2').hide();
   });
-  $(".slideupEcc").click(slideUpEcc);
+  $(".slideup<%= categories_for_header.second %>").click(slideUpEcc);
 }
 // slide up projects if hash from url
 var h = location.hash.substr(1);
@@ -191,7 +191,7 @@ if (h == '<%= categories_for_header.first %>_scroll') {
     console.log('less than 1451 scroll')
   } else {
     $('html, body').animate({
-      scrollTop: $("#resScroll").offset().top - $("#resScroll").height()
+      scrollTop: $("#<%= categories_for_header.first %>Scroll").offset().top - $("#<%= categories_for_header.first %>Scroll").height()
     }, 2000);
     console.log('greater than 1451 scroll')
   }
@@ -199,7 +199,7 @@ if (h == '<%= categories_for_header.first %>_scroll') {
 if (h == '<%= categories_for_header.second %>_scroll') {
   slideUpProjects();
   $('html, body').animate({
-    scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
+    scrollTop: $("#<%= categories_for_header.second %>Scroll").offset().top - $("#<%= categories_for_header.second %>Scroll").height()
   }, 2000);
 };
 $(document).ready(function() {
