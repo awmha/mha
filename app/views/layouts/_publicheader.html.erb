@@ -14,7 +14,7 @@
         <% if current_page?(contact_path) %>
           <% categories_for_header.each do |category| %>
             <li>
-              <a class="slideup" href="<%= root_path %>#<%= category %>" id="work_link"><%= category %></a>
+              <a class="slideup" href="<%= root_path %>#<%= category %>_scroll" id="work_link"><%= category %></a>
             </li>
             <li class="navLine">|</li>
           <% end %>

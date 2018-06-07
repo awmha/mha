@@ -184,7 +184,7 @@ if ($(window).height() >= 1451) {
 }
 // slide up projects if hash from url
 var h = location.hash.substr(1);
-if (h == 'res_scroll') {
+if (h == '<%= categories_for_header.first %>_scroll') {
   if ($(window).height() <= 1450) {
     slideUpProjects();
     $('.arrow-container').hide();
@@ -196,7 +196,7 @@ if (h == 'res_scroll') {
     console.log('greater than 1451 scroll')
   }
 };
-if (h == 'ecc_scroll') {
+if (h == '<%= categories_for_header.second %>_scroll') {
   slideUpProjects();
   $('html, body').animate({
     scrollTop: $("#eccScroll").offset().top - $("#eccScroll").height()
