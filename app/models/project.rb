@@ -13,10 +13,10 @@ class Project < ApplicationRecord
   end
 
   def add_initial_position
-    n = 1
-    self.project_pictures.each do |project_picture|
-      project_picture.position = n
+    n = -1
+    self.pictures.sort_by(&:height).each do |project_picture|
       n += 1
+      project_picture.project_pictures.first.update_attribute :position, n
     end
   end
 
