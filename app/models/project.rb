@@ -13,7 +13,12 @@ class Project < ApplicationRecord
   end
 
   def add_initial_position
-    n = -1
+    if self.category != "contact" && self.category != "main"
+      n = -1
+    else
+      n = 0
+    end
+
     self.pictures.sort_by(&:height).each do |project_picture|
       n += 1
       project_picture.project_pictures.first.update_attribute :position, n

@@ -5,6 +5,10 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+
+    if @projects.where(category: "main").count > 1
+      flash[:warning] = "There is more than one project set as MAIN. Only the first project listed will be displayed as the main carousel."
+    end
   end
 
   def show
@@ -41,6 +45,9 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
+    if params[:project][:category] != @project.category
+      @project.add_initial_position
+    end
     if params[:project][:category] == "main"
       #if another project is already MAIN, sets to no_display
       set_as_main_project
@@ -48,11 +55,11 @@ class ProjectsController < ApplicationController
     if params[:project][:category] == "contact"
       set_as_contact_page_project
     end
-    if @project.category == "main" && params[:project][:category] != "main"
+    if Project.all.where(category: "main").count == 1 && @project.category == "main" && params[:project][:category] != "main"
       flash[:danger] = "Cannot change category from MAIN. First set a different project as MAIN and then change the category of the former MAIN project."
       redirect_to projects_url and return
     end
-    if @project.category == "contact" && params[:project][:category] != "contact"
+    if Project.all.where(category: "contact").count == 1 && @project.category == "contact" && params[:project][:category] != "contact"
       flash[:danger] = "Cannot change category from CONTACT. First set a different project as CONTACT and then change the category of the former CONTACT project."
       redirect_to projects_url and return
     end

@@ -16,8 +16,10 @@
         <% end %>
       </td>
       <td>
-        <% if project_picture.position == 1 || project_picture.position == @project.project_pictures.count %>
-          <%= button_to "SET AS THUMB", make_thumbnail_path, params: { image_position: project_picture.position, project: project, picture_height: project_picture.picture.height, picture_width: project_picture.picture.width }, :class => "btn-primary" %>
+        <% if @project.category != "main" %>
+          <% if project_picture.position == 1 || project_picture.position == @project.project_pictures.count %>
+            <%= button_to "SET AS THUMB", make_thumbnail_path, params: { image_position: project_picture.position, project: project, picture_height: project_picture.picture.height, picture_width: project_picture.picture.width }, :class => "btn-primary" %>
+          <% end %>
         <% end %>
         <% if project_picture.position != 0 and project_picture.position != 1 %>
           <%= button_to "\u2191", move_project_image_up_path, params: { image_position: project_picture.position, project: project }, :class => "btn-info" %>

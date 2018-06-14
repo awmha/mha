@@ -54,30 +54,32 @@
     </div>
   </div>
 </div>
-<% categories_for_header[1..-1].each_with_index do |category, i| %>
-  <div class="col-md-9 first col-sm-12 pull-right" id="<%= category %>Scroll">
-    <div class="section">
-      <div class="panel-heading">
-        <a id="selected_projects" name="ecc_projects"></a>
-        <h4><%= category %></h4>
-      </div>
-      <div class="panel-body">
-        <% projects_for_carousel.where(category: category).each do |project| %>
-        <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
-          <div class="texthover">
-            <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
-            <div class="overlay <%= project.name.parameterize %>">
-              <div class="overlay-container">
-                <p class="project-name"><%= project.name %></p>
-                <p class="location"><%= project.location %></p>
+<% if !categories_for_header.blank? %>
+  <% categories_for_header[1..-1].each_with_index do |category, i| %>
+    <div class="col-md-9 first col-sm-12 pull-right" id="<%= category %>Scroll">
+      <div class="section">
+        <div class="panel-heading">
+          <a id="selected_projects" name="ecc_projects"></a>
+          <h4><%= category %></h4>
+        </div>
+        <div class="panel-body">
+          <% projects_for_carousel.where(category: category).each do |project| %>
+          <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
+            <div class="texthover">
+              <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
+              <div class="overlay <%= project.name.parameterize %>">
+                <div class="overlay-container">
+                  <p class="project-name"><%= project.name %></p>
+                  <p class="location"><%= project.location %></p>
+                </div>
               </div>
             </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
 </div><!-- /.row -->
