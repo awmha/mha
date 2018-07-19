@@ -14,11 +14,10 @@
       <th colspan="3" class="text-center">Actions</th>
     </tr>
   </thead>
-
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= image_tag project.pictures.first.image, style:"height:100px;float:left;margin:5px" if !project.pictures.empty? %></td>
+        <td><%= image_tag get_thumbnail(project), style:"height:100px;float:left;margin:5px" if !project.pictures.empty? %></td>
         <td><%= project.name %></td>
         <td><%= project.location %></td>
         <td><%= project.category %></td>
@@ -31,7 +30,8 @@
     <% end %>
   </tbody>
 </table>
-<p class="bg-warning">The following categories will NOT display as clickable projects on homepage: <b>Main</b>, <b>Contact</b>, <b>No Display</b>.  All other categories will be listed in header and separated on homepage.</p>
-<br>
 
+<p class="bg-warning">The following categories will NOT display as clickable projects on homepage: <b>Main</b>, <b>Contact</b>, <b>No Display</b>.  All other categories will be listed in header and separated on homepage.</p>
+
+<br>
 <%= link_to 'New Project', new_project_path, :class => "btn btn-primary" %>

@@ -4,7 +4,6 @@
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
       <ul>
       <% @project.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,23 +12,24 @@
     </div>
   <% end %>
 
-<p><%= f.label :name %>
-<%= f.text_field :name %></p>
-
-<p><%= f.label :location %>
-<%= f.text_field :location %></p>
-
-  <p>
-    <%= f.label :category %>
-    <%= f.select(:category, @project.project_category_list, {}, { id: 'category-select' } ) %>
-  </p>
-
-<%= file_field_tag "images[]", type: :file, multiple: true %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
 
-<% end %>
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
 
-<%= link_to 'Back', projects_path %>
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.select(:category, @project.project_category_list, {}, { id: 'category-select' } ) %>
+  </div>
+
+  <%= file_field_tag "images[]", type: :file, multiple: true %>
+  <br/>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

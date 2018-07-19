@@ -37,68 +37,91 @@ function addSocialMedia() {
     </div>
   <% end %>
 
-<p><%= f.label "Company Name" %>
-<%= f.text_field :company_name, placeholder: "Company Name" %></p>
+  <div class="field">
+    <%= f.label "Company Name" %>
+    <%= f.text_field :company_name, placeholder: "Company Name", :size => 50 %>
+  </div>
 
-<p><%= f.label "Address Line 1" %>
-<%= f.text_field :address_line_1, placeholder: "Building Street, Suite" %></p>
+  <div class="field">
+    <%= f.label "Address Line 1" %>
+    <%= f.text_field :address_line_1, placeholder: "Building Street, Suite", :size => 50 %>
+  </div>
 
-<p><%= f.label "Address Line 2" %>
-<%= f.text_field :address_line_2, placeholder: "City, State Zip" %></p>
+  <div class="field">
+    <%= f.label "Address Line 2" %>
+    <%= f.text_field :address_line_2, placeholder: "City, State Zip", :size => 50 %>
+  </div>
 
-<p><%= f.label "Phone Number" %>
-<%= f.text_field :phone_number, placeholder: "Phone" %></p>
+  <div class="field">
+    <%= f.label "Phone Number" %>
+    <%= f.text_field :phone_number, placeholder: "Phone" %>
+  </div>
 
-<p><%= f.label "Fax Number" %>
-<%= f.text_field :fax_number, placeholder: "Fax" %></p>
+  <div class="field">
+    <%= f.label "Fax Number" %>
+    <%= f.text_field :fax_number, placeholder: "Fax" %>
+  </div>
 
-<p><%= f.label "Company Email" %>
-<%= f.text_field :company_email, placeholder: "Company Email" %></p>
+  <div class="field">
+    <%= f.label "Company Email" %>
+    <%= f.text_field :company_email, placeholder: "Company Email", :size => 50 %>
+  </div>
 
-<p><%= f.label "Logo" %>
-<%= image_tag(@static_page.logo) if @static_page.logo? %>
-<% if @static_page.height? && @static_page.width? %>
-  <p><%= @static_page.height %> x <%= @static_page.width %></p>
-<% end %>
-<p>Upload a logo file:
-  <%= f.file_field :logo %>
-</p>
-
-<p style="font-weight:bold;">Social Media URLs</p>
-  <% social_media_options = [['Facebook', 'facebook'], ['Instagram', 'instagram'], ['Houzz', 'houzz'], ['Pinterest', 'pinterest'], ['Twitter', 'twitter'], ['LinkedIn', 'linkedin'], ['Tumblr', 'tumblr'], ['Flickr', 'flickr'], ['Google+', 'googleplus'], ['You Tube', 'youtube'], ['Vimeo', 'vimeo'], ['Email', 'email']] %>
-
-  <div id="social_media_urls">
-    <ul id="social_media_list">
-    <% if !@static_page.social_media.blank? %>
-      <% @static_page.social_media.each_with_index do |(type, value), i| %>
-        <li><%= select_tag "social_media[#{i+1}]", options_for_select(social_media_options, "#{type}"), class: 'input-medium' %>
-        <%= text_field_tag "social_media_values[#{i+1}]", value, class: 'input-block-level' %></li>
-      <% end %>
-    <% else %>
-      <li><%= select_tag 'social_media[1]', options_for_select(social_media_options, 'facebook'), class: 'input-medium' %>
-      <%= text_field_tag 'social_media_values[1]', @static_page.facebook, class: 'input-block-level' %></li>
-      <li><%= select_tag 'social_media[2]', options_for_select(social_media_options, 'twitter'), class: 'input-medium' %>
-      <%= text_field_tag 'social_media_values[2]', @static_page.twitter, class: 'input-block-level' %></li>
+  <div class="field">
+    <%= f.label "Logo" %>
+    <%= image_tag(@static_page.logo) if @static_page.logo? %>
+    <% if @static_page.height? && @static_page.width? %>
+      <p><%= @static_page.height %> x <%= @static_page.width %></p>
     <% end %>
-    </ul>
+
+    <p>Upload a logo file:
+      <%= f.file_field :logo %>
+    </p>
   </div>
-  <button id="add_social_media" type="button" class="btn btn-info" style="margin-bottom:20px;">Add Social Media URL</button>
 
-<p><%= f.label "About Us" %>
-<%= f.text_area :about_us, placeholder: "Text to be shown on homepage under about us.", :cols => "50", :rows => "5" %></p>
+  <div class="field">
+    <%= f.label "Social Media URLs" %>
+    <% social_media_options = [['Facebook', 'facebook'], ['Instagram', 'instagram'], ['Houzz', 'houzz'], ['Pinterest', 'pinterest'], ['Twitter', 'twitter'], ['LinkedIn', 'linkedin'], ['Tumblr', 'tumblr'], ['Flickr', 'flickr'], ['Google+', 'googleplus'], ['You Tube', 'youtube'], ['Vimeo', 'vimeo'], ['Email', 'email']] %>
 
-<p><%= f.label "Contact info text" %>
-<%= f.text_area :contact_text, placeholder: "Text to be shown at top of contact page", :cols => "50", :rows => "5" %></p>
+    <div id="social_media_urls">
+      <ul id="social_media_list">
+      <% if !@static_page.social_media.blank? %>
+        <% @static_page.social_media.each_with_index do |(type, value), i| %>
+          <li><%= select_tag "social_media[#{i+1}]", options_for_select(social_media_options, "#{type}"), class: 'input-medium' %>
+          <%= text_field_tag "social_media_values[#{i+1}]", value, class: 'input-block-level', :size => 70 %></li>
+        <% end %>
+      <% else %>
+        <li><%= select_tag 'social_media[1]', options_for_select(social_media_options, 'facebook'), class: 'input-medium' %>
+        <%= text_field_tag 'social_media_values[1]', @static_page.facebook, class: 'input-block-level', :size => 70 %></li>
+        <li><%= select_tag 'social_media[2]', options_for_select(social_media_options, 'twitter'), class: 'input-medium' %>
+        <%= text_field_tag 'social_media_values[2]', @static_page.twitter, class: 'input-block-level', :size => 70 %></li>
+      <% end %>
+      </ul>
+    </div>
+    <button id="add_social_media" type="button" class="btn btn-info" style="margin-bottom:20px;">Add Social Media URL</button>
+  </div>
 
-<p><%= f.label "Meta Description" %>
-<%= f.text_area :meta_description, placeholder: "Meta description for search engines.", :cols => "50", :rows => "5" %></p>
+  <div class="field">
+    <%= f.label "About Us" %>
+    <%= f.text_area :about_us, placeholder: "Text to be shown on homepage under about us.", :cols => "70", :rows => "20" %>
+  </div>
 
-<p><%= f.label "Meta Keywords" %>
-<%= f.text_area :meta_keywords, placeholder: "Meta keywords for search engines.", :cols => "50", :rows => "5" %></p>
+  <div class="field">
+    <%= f.label "Contact info text" %>
+    <%= f.text_area :contact_text, placeholder: "Text to be shown at top of contact page", :cols => "70", :rows => "5" %>
+  </div>
 
-<h4>
+  <div class="field">
+    <%= f.label "Meta Description" %>
+    <%= f.text_area :meta_description, placeholder: "Meta description for search engines.", :cols => "70", :rows => "10" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Meta Keywords" %>
+    <%= f.text_area :meta_keywords, placeholder: "Meta keywords for search engines.", :cols => "70", :rows => "5" %>
+  </div>
+
   <div class="actions">
-    <%= f.submit "Submit" %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
-</h4>

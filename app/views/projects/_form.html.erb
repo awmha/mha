@@ -10,22 +10,24 @@
     </div>
   <% end %>
 
-    <p><%= f.label :name %>
-    <%= f.text_field :name %></p>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
 
-    <p><%= f.label :location %>
-    <%= f.text_field :location %></p>
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
 
-    <p>Created by: <%= project.user.try(:name) %></p>
+  <p>Created by: <%= project.user.try(:name) %></p>
 
-  <p>
+  <div class="field">
     <%= f.label :category %>
     <%= f.select(:category, @project.project_category_list, {}, { id: 'category-select' } ) %>
-  </p>
+  </div>
 
-  <p>
-    <div class="actions">
-      <%= f.submit "Submit" %>
-    </div>
-    <% end %>
-  </p>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

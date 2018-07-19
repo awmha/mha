@@ -16,16 +16,21 @@
 
 <table class="project_edit">
   <thead>
-    <th style="width:25px">No</th>
+    <th>Order</th>
     <th>Image</th>
   </thead>
-<% @project.pictures.each_with_index do |image, index| %>
+<% @project.project_pictures.each do |project_picture| %>
   <tr>
-    <td><%= index %></td>
-
     <td>
-      <%= link_to image_url(image.image), :target => "_blank" do %>
-        <%= image_tag image.image, style:"height:200px" if @project.pictures %>
+      <% if project_picture.position == 0 %>
+        THUMBNAIL
+      <% else %>
+        <%= project_picture.position %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to image_url(project_picture.picture.image), :target => "_blank" do %>
+        <%= image_tag project_picture.picture.image, style:"height:200px" if @project.pictures %>
       <% end %>
     </td>
   </tr>

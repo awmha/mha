@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
         @project.save
       end
       flash[:success] = "Your project has been created."
-      redirect_to @project
+      redirect_to edit_project_path(@project)
     else 
       flash[:danger] = "Something went wrong."
       render :new
@@ -77,7 +77,7 @@ class ProjectsController < ApplicationController
       end
       @project.save
       flash[:success] = "Project has been updated."
-      redirect_to @project
+      redirect_to edit_project_path(@project)
     else
       render :edit
     end

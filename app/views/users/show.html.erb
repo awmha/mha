@@ -1,20 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p class="user-name">
+<h4>
   <%= @user.name %>
-</p>
+</h4>
 
-<p>
+<h4>
   <strong>Email:</strong>
   <%= @user.email %>
-</p>
+</h4>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="actions">
+  <%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-warning" %>
+</div>
 
 <div class="col-md-8">
+  <h3>Projects (<%= @user.projects.count %>)</h3>
   <% if @user.projects.any? %>
-    <h3>Projects (<%= @user.projects.count %>)</h3>
     <ol class="projects">
       <%= render @projects %>
     </ol>

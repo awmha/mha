@@ -53,7 +53,8 @@
     <%= f.hidden_field :project, :value => @project.id %>
     <%= file_field_tag "images[]", type: :file, multiple: true %>
   </field>
+  <br/>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
