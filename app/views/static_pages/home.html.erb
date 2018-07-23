@@ -26,7 +26,7 @@
     </div>
     <div class="panel-body">
       <% projects_for_carousel.where(category: categories_for_header.first).each do |project| %>
-      <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
+      <div class="col-lg-4 col-md-6 col-sm-6">
         <div class="texthover">
           <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
           <div class="overlay <%= project.name.parameterize %>">
@@ -49,7 +49,7 @@
     </div>
     <div class="panel panel-default" style="background-color: transparent;">
       <div class="panel-body about_us">
-        <p><%= simple_format h(@static_page_info.about_us) %></p>
+        <%= simple_format h(@static_page_info.about_us) %>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="panel-body">
           <% projects_for_carousel.where(category: category).each do |project| %>
-          <div class="col-lg-4 col-md-6 col-sm-6" style="padding:0 15px 15px 0">
+          <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="texthover">
               <%= image_tag get_thumbnail(project), class: "img-responsive img-portfolio img-hover" %>
               <div class="overlay <%= project.name.parameterize %>">

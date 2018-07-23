@@ -23,12 +23,12 @@
         <% else %>
           <% categories_for_header.each do |category| %>
             <li>
-              <span class="slideup<%= category %>" id="work_link"><%= category %></span>
+              <a class="slideup<%= category %>" id="work_link" href="#"><%= category %></a>
             </li>
             <li class="navLine">|</li>
           <% end %>
           <li>
-            <span class="slideupAbout" id="about_link">About Us</span>
+            <a class="slideupAbout" id="about_link" href="#">About Us</a>
         <% end %>
         </li>
         <li class="navLine">|</li>
