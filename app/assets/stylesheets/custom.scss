@@ -75,6 +75,8 @@ h4 {
   text-align:center
 }
 
+.btn {margin-bottom:5px}
+
 /* header */
 
 #logo {
@@ -289,6 +291,12 @@ h4,
   }
   #custom-pager {
     margin-right:20px;
+  }
+  .slick-dots {
+    padding-right:15px!important
+  }
+  .slick-dots li {
+    margin: 0 3px!important
   }
 }
 @media (min-width: 768px) {
@@ -1249,15 +1257,15 @@ a.active {
   }
 }
 
-/* iphone 5 portraint */
+/* iphone 5 portrait */
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
-  .slideImage {
+  /*.slideImage {
     height: 450px;
-  }
+  }*/
 .contact-responsive2 {
     padding: 120px 60px!important;
 }
@@ -1274,7 +1282,7 @@ a.active {
 }
 }
 
-/* proj images for iphone 6 */
+/* proj images for iphone 6 
 @media only screen 
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
@@ -1283,7 +1291,7 @@ a.active {
   .slideImage {
     height: 550px;
   }
-}
+}*/
 
 /* proj images for iphone 6+ */
 @media only screen 
@@ -1307,12 +1315,12 @@ a.active {
   }
 }
 
-/* nexus 6p */
+/* nexus 6p 
 @media (min-device-width: 412px) and (max-device-width: 690px) { 
   .slideImage {
     height: 610px;
   }
-}
+}*/
 
 .headerInitial {
   height: calc(100% + 50px);
@@ -1441,7 +1449,7 @@ ul.nav {
 
 .newSlide {display:none;height:100%;width:100%;}
 #slide-up-hover {width:33.3%;margin:0 0 0 33.3%;float:left}
-#dot-holder {width:25%;float:right}
+
 #dot-holder:before {
   content: '';
   height: 100%;

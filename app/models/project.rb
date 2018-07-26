@@ -8,6 +8,8 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :project_pictures, allow_destroy: true
   after_create :main_picture_default
 
+  default_scope { order(order: :asc)}
+
   def self.with_pictures
     includes(:pictures)
   end
@@ -45,5 +47,23 @@ class Project < ApplicationRecord
   def project_category_list
     project_category_list = ["main", "contact", "residential", "no_display", "ecclesiastical"] << Project.all.pluck(:category)
     project_category_list.flatten.uniq
+  end
+
+  def check_order
+    # REORDER FORMER CATEGORY TOO
+    category = self.category
+
+    category_count = Project.where(category: category).count
+
+    max_order = Project.where(category: self.category).maximum("order")
+
+    if (max_order != category_count - 1) || (category_count != Project.where(category: self.category).pluck(:order).uniq.length)
+      n = 0
+      Project.where(category: category).each do |project|
+        project.order = n
+        n += 1
+        project.save
+      end
+    end
   end
 end

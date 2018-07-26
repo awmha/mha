@@ -299,7 +299,8 @@ $(function() {
     $('#footerOverflowFix').show();
     console.log('1 delay')
     $('#dashboard').delay(1).queue(function(nxt) {
-      $(this).html(car_html_file + " #dashboard", function() {
+      // $(this).html(car_html_file + " #dashboard", function() {
+      $(this).html(car_html_file, function() {
         console.log('another time out')
         // setTimeout(function() {
         //     // if one slide image

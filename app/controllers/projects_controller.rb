@@ -9,6 +9,62 @@ class ProjectsController < ApplicationController
     if @projects.where(category: "main").count > 1
       flash[:warning] = "There is more than one project set as MAIN. Only the first project listed will be displayed as the main carousel."
     end
+
+    def move_project_up
+      #ADD ABILITY TO MOVE FIRST TO LAST
+      @project = Project.find(params[:project])
+
+      @project.check_order
+
+      old_position = params[:project_position].to_i
+      category = params[:category]
+
+      #NO NEED FOR THIS YET
+      # category_count = Project.where(category: params[:category]).count
+
+      new_position = old_position - 1
+
+      original_higher_project = Project.where(category: params[:category]).find_by(order: new_position)
+
+      original_higher_project.order = old_position
+
+      new_higher_project = Project.find_by(id: params[:project])
+
+      new_higher_project.order = new_position
+
+      new_higher_project.save
+      original_higher_project.save
+
+      flash[:success] = "Project has been moved up."
+      redirect_to projects_path
+    end
+
+    def move_project_down
+      #ADD ABILITY TO MOVE LAST TO FIRST
+      @project = Project.find(params[:project])
+
+      old_position = params[:project_position].to_i
+      category = params[:category]
+
+      @project.check_order
+
+      # category_count = Project.where(category: params[:category]).count
+
+      new_position = old_position + 1
+      
+      original_lower_project = Project.where(category: params[:category]).find_by(order: new_position)
+
+      original_lower_project.order = old_position
+
+      new_lower_project = Project.find_by(id: params[:project])
+
+      new_lower_project.order = new_position
+
+      new_lower_project.save
+      original_lower_project.save
+      flash[:success] = "Project has been moved down."
+      redirect_to projects_path
+    end
   end
 
   def show
@@ -26,6 +82,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
+
+    category_count = Project.where(category: @project.category).count
+    @project.order = category_count
 
     if @project.save
       if params[:images]
@@ -75,6 +134,7 @@ class ProjectsController < ApplicationController
           @project.add_new_position
         end
       end
+      @project.check_order
       @project.save
       flash[:success] = "Project has been updated."
       redirect_to edit_project_path(@project)
@@ -86,6 +146,7 @@ class ProjectsController < ApplicationController
   def destroy
     set_project
     if @project.destroy
+      @project.check_order
       flash[:success] = "Project has been deleted."
       redirect_to projects_url
     else
@@ -205,7 +266,7 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:name, :location, :user_id, :category, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
+      params.require(:project).permit(:name, :location, :user_id, :category, :order, project_pictures_attributes: [:id, picture_attributes: [:image, :position, :_destroy]])
     end
 
     def correct_user

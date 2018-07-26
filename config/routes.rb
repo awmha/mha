@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   post 'projects/:id/move_image_down' => 'projects#move_image_down', as: :move_project_image_down
   post 'projects/:id/make_thumbnail' => 'projects#make_thumbnail', as: :make_thumbnail
   
+  post 'projects/move_project_up' => 'projects#move_project_up', as: :move_project_up
+  post 'projects/move_project_down' => 'projects#move_project_down', as: :move_project_down
+
   get "/sign_up", to: 'users#new'
   post "/sign_up", to: 'users#create'
 
