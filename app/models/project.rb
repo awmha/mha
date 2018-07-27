@@ -49,17 +49,14 @@ class Project < ApplicationRecord
     project_category_list.flatten.uniq
   end
 
-  def check_order
-    # REORDER FORMER CATEGORY TOO
-    category = self.category
+  def check_order_by_category(cat)
+    category_count = Project.where(category: cat).count
 
-    category_count = Project.where(category: category).count
+    max_order = Project.where(category: cat).maximum("order")
 
-    max_order = Project.where(category: self.category).maximum("order")
-
-    if (max_order != category_count - 1) || (category_count != Project.where(category: self.category).pluck(:order).uniq.length)
+    if (max_order != category_count - 1) || (category_count != Project.where(category: cat).pluck(:order).uniq.length)
       n = 0
-      Project.where(category: category).each do |project|
+      Project.where(category: cat).each do |project|
         project.order = n
         n += 1
         project.save

@@ -14,10 +14,11 @@ class ProjectsController < ApplicationController
       #ADD ABILITY TO MOVE FIRST TO LAST
       @project = Project.find(params[:project])
 
-      @project.check_order
+      category = params[:category]
+
+      @project.check_order_by_category(category)
 
       old_position = params[:project_position].to_i
-      category = params[:category]
 
       #NO NEED FOR THIS YET
       # category_count = Project.where(category: params[:category]).count
@@ -43,10 +44,11 @@ class ProjectsController < ApplicationController
       #ADD ABILITY TO MOVE LAST TO FIRST
       @project = Project.find(params[:project])
 
-      old_position = params[:project_position].to_i
       category = params[:category]
 
-      @project.check_order
+      @project.check_order_by_category(category)
+
+      old_position = params[:project_position].to_i
 
       # category_count = Project.where(category: params[:category]).count
 
@@ -106,6 +108,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if params[:project][:category] != @project.category
       @project.add_initial_position
+      @old_category = @project.category
     end
     if params[:project][:category] == "main"
       #if another project is already MAIN, sets to no_display
@@ -134,7 +137,8 @@ class ProjectsController < ApplicationController
           @project.add_new_position
         end
       end
-      @project.check_order
+      @project.check_order_by_category(@project.category)
+      @project.check_order_by_category(@old_category)
       @project.save
       flash[:success] = "Project has been updated."
       redirect_to edit_project_path(@project)
@@ -146,7 +150,7 @@ class ProjectsController < ApplicationController
   def destroy
     set_project
     if @project.destroy
-      @project.check_order
+      @project.check_order_by_category(@project.category)
       flash[:success] = "Project has been deleted."
       redirect_to projects_url
     else
