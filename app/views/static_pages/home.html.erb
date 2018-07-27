@@ -124,7 +124,6 @@ $(document).ready(function() {
     reorder('#<%= categories_for_header.first %>Scroll', '#aboutScroll', '#<%= categories_for_header.second %>Scroll');
   });
 });
-
 function reorder(el1, el2, el3) {
   var $window = $(window);
   if ($window.width() <= 991) {
@@ -406,7 +405,6 @@ $(function() {
       replacecarousel('<div id="new-car-1"><% gallery_images(project).each do |pp|%><div><%= image_tag pp.picture.image, class:"slideImage", style:"margin-top:61px" %></div><% end %></div>');
     });
     <% end %>
-
   $(function() {
     $('.nav a').on('click', function() {
       if ($('.navbar-toggle').css('display') != 'none') {

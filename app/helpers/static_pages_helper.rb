@@ -19,7 +19,9 @@ module StaticPagesHelper
   end
 
   def categories_for_header
-    projects_for_carousel.pluck(:category).uniq
+    categories = ["residential", "ecclesiastical"]
+    categories << projects_for_carousel.pluck(:category)
+    return categories.flatten.uniq
   end
 
   def get_thumbnail(project)
