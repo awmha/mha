@@ -39,8 +39,8 @@
           <td><%= project.pictures.count %></td>
           <td><%= project.user.name %></td>
           <td><%= link_to 'Show', project, :class => "btn btn-info" %>
-          <%= link_to 'Edit', edit_project_path(project), :class => "btn btn-warning" %>
-          <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+          <% if admin? %><%= link_to 'Edit', edit_project_path(project), :class => "btn btn-warning" %>
+          <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %><% end %></td>
         </tr>
         <% end %>
     </tbody>

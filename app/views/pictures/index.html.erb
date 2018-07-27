@@ -29,7 +29,7 @@
         </td>
         <td><%= link_to 'Show', picture.image.url, target: :_blank, :class => "btn btn-info" %></td>
         <td>
-          <% if picture.project_pictures.blank? %>
+          <% if picture.project_pictures.blank? && admin? %>
             <%= link_to 'Destroy', picture, method: :delete, :class => "btn btn-danger" %>
           <% end %>
         </td>
