@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def admin_user
+      unless admin?
+        store_location
+        flash[:danger] = "Only admins can do that."
+        redirect_to login_url
+      end
+    end
+
     def load_static_page_info
       @static_page_info = StaticPage.find_by(id: 1)
     end

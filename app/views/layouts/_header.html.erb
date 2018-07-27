@@ -15,7 +15,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "Page Content", edit_static_page_path(1) %></li>
+          <li><%= link_to "Page Content", static_page_path(1) %></li>
           <li><%= link_to "Projects", projects_path %></li>
           <li><%= link_to "Pictures", pictures_path %></li>
           <li><%= link_to "Users", users_path %></li>
