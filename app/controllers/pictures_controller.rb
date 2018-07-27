@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :logged_in_user, only: [:show]
+  before_action :logged_in_user, only: [:show, :index]
   before_action :admin_user, only: [:new, :edit, :destroy, :update]
   
   def index
