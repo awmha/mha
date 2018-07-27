@@ -11,59 +11,49 @@ class ProjectsController < ApplicationController
     end
 
     def move_project_up
-      #ADD ABILITY TO MOVE FIRST TO LAST
       @project = Project.find(params[:project])
-
       category = params[:category]
-
       @project.check_order_by_category(category)
-
       old_position = params[:project_position].to_i
-
-      #NO NEED FOR THIS YET
-      # category_count = Project.where(category: params[:category]).count
-
-      new_position = old_position - 1
-
-      original_higher_project = Project.where(category: params[:category]).find_by(order: new_position)
-
-      original_higher_project.order = old_position
-
+      if old_position == 0
+        category_count = Project.where(category: category).count
+        new_position = category_count - 1
+      else
+        new_position = old_position - 1
+        original_higher_project = Project.where(category: category).find_by(order: new_position)
+        original_higher_project.order = old_position
+        original_higher_project.save
+      end
       new_higher_project = Project.find_by(id: params[:project])
-
       new_higher_project.order = new_position
-
       new_higher_project.save
-      original_higher_project.save
+      @project.check_order_by_category(category)
 
       flash[:success] = "Project has been moved up."
       redirect_to projects_path
     end
 
     def move_project_down
-      #ADD ABILITY TO MOVE LAST TO FIRST
       @project = Project.find(params[:project])
-
       category = params[:category]
-
       @project.check_order_by_category(category)
-
       old_position = params[:project_position].to_i
-
-      # category_count = Project.where(category: params[:category]).count
-
-      new_position = old_position + 1
-      
-      original_lower_project = Project.where(category: params[:category]).find_by(order: new_position)
-
-      original_lower_project.order = old_position
+      category_count = Project.where(category: category).count
+      if old_position == category_count - 1
+        new_position = -1
+      else
+        new_position = old_position + 1
+        original_lower_project = Project.where(category: category).find_by(order: new_position)
+        original_lower_project.order = old_position
+        original_lower_project.save
+      end
 
       new_lower_project = Project.find_by(id: params[:project])
-
       new_lower_project.order = new_position
-
       new_lower_project.save
-      original_lower_project.save
+      
+      @project.check_order_by_category(category)
+
       flash[:success] = "Project has been moved down."
       redirect_to projects_path
     end

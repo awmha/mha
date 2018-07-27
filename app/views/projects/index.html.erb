@@ -2,6 +2,7 @@
 
 <% cat_proj = @projects.group_by(&:category) %>
 <% cp = Hash[cat_proj.map{|k,v|[k, v.sort_by(&:order)]}] %>
+
 <% cp.each do |category, projects| %>
   <h1><%= category %></h1>
 
