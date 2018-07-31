@@ -39,8 +39,8 @@ class User < ApplicationRecord
     update_attribute(:activated_at, Time.zone.now)
   end
 
-  def send_activation_email
-    UserMailer.account_activation(self).deliver_now
+  def send_activation_email(admin)
+    UserMailer.account_activation(self, admin).deliver_now
   end
 
   def create_reset_digest

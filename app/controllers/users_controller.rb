@@ -22,7 +22,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if verify_recaptcha(model: @user) && @user.save
-        @user.send_activation_email
+        admins = User.where(admin: true)
+        admins.each do |admin|
+          @user.send_activation_email(admin)
+        end
         format.html { redirect_to @user, notice: 'User was created. Check email.' }
         format.json { render :show, status: :created, location: @user }
       else
