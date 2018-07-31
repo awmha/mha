@@ -11,6 +11,7 @@
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Open+Sans:400,300', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag @static_page_info.favicon, :rel => 'icon', :type => "image/x-icon" %>
     <meta name="description" content="<%= @static_page_info.meta_description %>">
     <meta name="author" content="MHA">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -20,13 +21,7 @@
 
   <body>
     <%= render "layouts/publicheader" %>
-    <!-- <div class="container"> -->
-      <%# flash.each do |message_type, message| %>
-        <!-- <div class="alert alert-<%#= message_type%>"><%#= message %></div> -->
-      <%# end %>
       <%= yield %> 
-      <%#= debug(params) if Rails.env.development? %>
-    <!-- </div> -->
     <%= render "layouts/publicfooter" %>
   </body>
 </html>
