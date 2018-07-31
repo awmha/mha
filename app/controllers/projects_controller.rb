@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:show, :index]
-  before_action :admin_user, only: [:new, :edit, :destroy, :update]
+  before_action :admin_user, only: [:new, :edit, :destroy, :update, :move_project_up, :move_project_down, :move_image_up, :move_image_down]
   include ProjectsHelper
 
   def index
