@@ -47,6 +47,9 @@ gem 'cocoon'
 gem 'jquery-slick-rails'
 gem 'selectize-rails'
 
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+gem 'recaptcha', :require => 'recaptcha/rails'
+
 group :test do
   gem 'minitest'
 end
