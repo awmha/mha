@@ -1,8 +1,11 @@
 class UserMailer < ApplicationMailer
 
   def account_activation(user)
+    admins = User.where(admin: true)
     @user = user
-    mail to: user.email, subject: "Account activation"
+    admins.each do |admin|
+      mail to: admin.email, subject: "New Account Activation Request"
+    end
   end
 
   def password_reset(user)
