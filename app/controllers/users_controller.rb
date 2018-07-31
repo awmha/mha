@@ -22,20 +22,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if verify_recaptcha(model: @user) && @user.save
-        format.html { redirect_to @user, notice: 'User was created.' }
+        @user.send_activation_email
+        format.html { redirect_to @user, notice: 'User was created. Check email.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @uyser.errors, status: :unprocessable_entity }
       end
-    end
-
-    if @user.save
-      @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
-    else
-      render 'new'
     end
   end
 
