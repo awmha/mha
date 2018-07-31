@@ -18,10 +18,15 @@
 <p>
   <%= @static_page.company_email %>
 </p>
-<p>
+<p><b>Logo which appears in the header:</b>
   <%= image_tag(@static_page.logo) %>
 </p>
 <p>
+  <b>Favicon which will appear on some browsers:</b>
+  <%= image_tag(@static_page.favicon) %>
+</p>
+<p>
+  <b>Social Media:</b>
   <ul>
     <% @static_page.social_media.each do |key, array| %>
       <li><%= key %> : <%= link_to array, array, target: :_blank %></li>

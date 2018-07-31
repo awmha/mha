@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723192713) do
+ActiveRecord::Schema.define(version: 20180731185908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180723192713) do
     t.string  "logo"
     t.integer "height"
     t.integer "width"
+    t.string  "favicon"
   end
 
   create_table "users", force: :cascade do |t|

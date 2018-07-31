@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MHA : <%= yield(:title) %></title>
+    <title>MHA Admin</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag @static_page_info.favicon, :rel => 'icon', :type => "image/x-icon" %>
   </head>
 
   <body>

@@ -52,6 +52,6 @@ class StaticPagesController < ApplicationController
   private
 
   def static_page_params
-    params.require(:static_page).permit(:company_name, :address_line_1, :address_line_2, :phone_number, :fax_number, :company_email, :contact_text, :about_us, :meta_description, :meta_keywords, :logo)
+    params.require(:static_page).permit(:company_name, :address_line_1, :address_line_2, :phone_number, :fax_number, :company_email, :contact_text, :about_us, :meta_description, :meta_keywords, :logo, :favicon)
   end
 end

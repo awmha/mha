@@ -80,6 +80,15 @@ function addSocialMedia() {
   </div>
 
   <div class="field">
+    <%= f.label "favicon" %>
+    <%= image_tag(@static_page.favicon) if @static_page.favicon %>
+
+    <p>Upload a logo file:
+      <%= f.file_field :favicon %>
+    </p>
+  </div>
+
+  <div class="field">
     <%= f.label "Social Media URLs" %>
     <% social_media_options = [['Facebook', 'facebook'], ['Instagram', 'instagram'], ['Houzz', 'houzz'], ['Pinterest', 'pinterest'], ['Twitter', 'twitter'], ['LinkedIn', 'linkedin'], ['Tumblr', 'tumblr'], ['Flickr', 'flickr'], ['Google+', 'googleplus'], ['You Tube', 'youtube'], ['Vimeo', 'vimeo'], ['Email', 'email']] %>
 
