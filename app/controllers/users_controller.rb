@@ -14,6 +14,9 @@ class UsersController < ApplicationController
   end
 
   def new
+    if logged_in?
+      redirect_to projects_path
+    end
     @user = User.new
   end
 
@@ -30,7 +33,7 @@ class UsersController < ApplicationController
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @uyser.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
