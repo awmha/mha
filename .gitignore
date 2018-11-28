@@ -41,3 +41,5 @@ config/initializers/secret_token.rb
 bower.json
 
 /public/uploads
+
+/config/newrelic.yml

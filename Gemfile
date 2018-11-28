@@ -50,6 +50,8 @@ gem 'selectize-rails'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', :require => 'recaptcha/rails'
 
+gem 'newrelic_rpm'
+
 group :test do
   gem 'minitest'
 end
