@@ -45,7 +45,7 @@ class Project < ApplicationRecord
   end
 
   def project_category_list
-    project_category_list = ["main", "contact", "residential", "no_display", "ecclesiastical"] << Project.all.pluck(:category)
+    project_category_list = ["main", "contact", "selected_projects", "no_display", "process_Amp_progress"] << Project.all.pluck(:category)
     project_category_list.flatten.uniq
   end
 

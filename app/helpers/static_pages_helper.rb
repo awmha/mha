@@ -19,7 +19,7 @@ module StaticPagesHelper
   end
 
   def categories_for_header
-    categories = ["residential", "ecclesiastical"]
+    categories = ["selected_projects", "process_Amp_progress"]
     categories << projects_for_carousel.pluck(:category)
     return categories.flatten.uniq
   end

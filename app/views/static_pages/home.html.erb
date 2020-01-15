@@ -22,7 +22,7 @@
   <div class="section">
     <div class="panel-heading">
       <a id="selected_projects" name="selected_projects"></a>
-      <h4><%= categories_for_header.first %></h4>
+      <h4><%= categories_for_header.first.sub("_", " ") %></h4>
     </div>
     <div class="panel-body">
       <% projects_for_carousel.where(category: categories_for_header.first).each do |project| %>
@@ -60,7 +60,7 @@
       <div class="section">
         <div class="panel-heading">
           <a id="selected_projects" name="ecc_projects"></a>
-          <h4><%= category %></h4>
+          <h4><%= category.sub("_Amp_", " & ") %></h4>
         </div>
         <div class="panel-body">
           <% projects_for_carousel.where(category: category).each do |project| %>
