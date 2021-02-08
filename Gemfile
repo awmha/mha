@@ -39,7 +39,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'carrierwave',             '~> 1.0'
+gem 'carrierwave',             '~> 1.3'
 gem "mini_magick", ">= 4.9.4"
 gem 'fog',                     '1.38.0'
 gem 'font-awesome-rails'
